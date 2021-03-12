@@ -1,0 +1,2200 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Bird\_Strike\_Incidents\_Database},
+  pdfauthor={Yash Manish Kothari, Sanyam Harne},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{xcolor}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Bird\_Strike\_Incidents\_Database}
+\author{Yash Manish Kothari, Sanyam Harne}
+\date{}
+
+\begin{document}
+\maketitle
+
+\hypertarget{erd---link-httpslucid.applucidchartinvitationsaccept89b73b05-fc5a-4295-a3e0-2113e8319cda}{%
+\section{\texorpdfstring{ERD - link:
+\url{https://lucid.app/lucidchart/invitations/accept/89b73b05-fc5a-4295-a3e0-2113e8319cda}}{ERD - link: https://lucid.app/lucidchart/invitations/accept/89b73b05-fc5a-4295-a3e0-2113e8319cda}}\label{erd---link-httpslucid.applucidchartinvitationsaccept89b73b05-fc5a-4295-a3e0-2113e8319cda}}
+
+\hypertarget{author1-yash-manish-kothari-kothari.ynortheastern.edu}{%
+\section{\texorpdfstring{Author1: Yash Manish Kothari,
+\href{mailto:kothari.y@northeastern.edu}{\nolinkurl{kothari.y@northeastern.edu}}}{Author1: Yash Manish Kothari, kothari.y@northeastern.edu}}\label{author1-yash-manish-kothari-kothari.ynortheastern.edu}}
+
+\hypertarget{author2-sanyam-harne-harne.sanortheastern.edu}{%
+\section{\texorpdfstring{Author2: Sanyam Harne,
+\href{mailto:harne.sa@northeastern.edu}{\nolinkurl{harne.sa@northeastern.edu}}}{Author2: Sanyam Harne, harne.sa@northeastern.edu}}\label{author2-sanyam-harne-harne.sanortheastern.edu}}
+
+\#Including required packages
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/yashk/Documents/DBMS-Workspace/Practicum1"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. Library (must be installed prior to loading}
+\FunctionTok{library}\NormalTok{(RMySQL)     }\DocumentationTok{\#\#\# MySQL}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: DBI
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyr)      }\DocumentationTok{\#\#\# tidyr Seperating rows for handling multivalued attributes}
+\FunctionTok{library}\NormalTok{(sqldf)      }\DocumentationTok{\#\#\# SQLdf for using SQL commands on dataframes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: gsubfn
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: proto
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: RSQLite
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'RSQLite'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:RMySQL':
+## 
+##     isIdCurrent
+\end{verbatim}
+
+\begin{verbatim}
+## sqldf will default to using MySQL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{sqldf.driver =} \StringTok{"SQLite"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(dplyr)      }\DocumentationTok{\#\#\# dplyr for splitting dataframes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\#Reading CSV file
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#2. CSV File Name:}
+\CommentTok{\#setwd("Documents/DBMS{-}Workspace/Practicum1")}
+\NormalTok{file\_csv }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}BirdStrikesData.csv\textquotesingle{}}
+
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(file\_csv)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{separate\_rows}\NormalTok{(df1, Conditions..Precipitation)}
+\end{Highlighting}
+\end{Shaded}
+
+\#Setting up the database connection
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 4. Settings}
+\NormalTok{db\_user }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}root\textquotesingle{}}
+\NormalTok{db\_password }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Password@123\textquotesingle{}}
+\NormalTok{db\_name }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}practicum1\textquotesingle{}}
+
+\CommentTok{\# Local: localhost}
+\NormalTok{db\_host }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}localhost\textquotesingle{}} 
+\NormalTok{db\_port }\OtherTok{\textless{}{-}} \DecValTok{3306} \CommentTok{\# always this port unless you change it during installation}
+
+\CommentTok{\# 4. Connect to DB}
+\NormalTok{mydb }\OtherTok{\textless{}{-}}  \FunctionTok{dbConnect}\NormalTok{(}\FunctionTok{MySQL}\NormalTok{(), }\AttributeTok{user =}\NormalTok{ db\_user, }\AttributeTok{password =}\NormalTok{ db\_password,}
+                \AttributeTok{dbname =}\NormalTok{ db\_name, }\AttributeTok{host =}\NormalTok{ db\_host, }\AttributeTok{port =}\NormalTok{ db\_port)}
+
+\CommentTok{\#To send Local Variables we write the below statement}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, }\StringTok{"SET GLOBAL local\_infile = true;"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:12,0,0>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#dbListTables(mydb)}
+\end{Highlighting}
+\end{Shaded}
+
+\#Defining Schema of the database \#Dropping Tables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}bird\_strike\_incident\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:1936287860,0,1>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}airport\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:1802658148,0,2>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}precipitation\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:12,0,3>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}precipitation\_type\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:NA,0,4>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}wildlife\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:-25267736,0,5>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}airline\_aircrafts\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:12,0,6>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{(}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}airline\_operator\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:12,0,7>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{(}\StringTok{"DROP TABLE IF EXISTS practicum1.\textasciigrave{}aircraft\textasciigrave{};"}\NormalTok{);}
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:12,0,8>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbListTables}\NormalTok{(mydb);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## character(0)
+\end{verbatim}
+
+\#Table Defination aircraft
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{(}\StringTok{"}
+\StringTok{  CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}aircraft\textasciigrave{} (}
+\StringTok{  \textasciigrave{}AircraftTypeID\textasciigrave{} INT NOT NULL AUTO\_INCREMENT,}
+\StringTok{  \textasciigrave{}Type\textasciigrave{} VARCHAR(45) DEFAULT \textquotesingle{} \textquotesingle{},}
+\StringTok{  \textasciigrave{}Make\_Model\textasciigrave{} VARCHAR(45) DEFAULT \textquotesingle{} \textquotesingle{},}
+\StringTok{  \textasciigrave{}IsAircraftLarge\textasciigrave{} TINYINT DEFAULT 0,}
+\StringTok{  CONSTRAINT unique\_constraint UNIQUE(Type,Make\_Model,IsAircraftLarge),}
+\StringTok{  PRIMARY KEY (\textasciigrave{}AircraftTypeID\textasciigrave{}));}
+\StringTok{"}\NormalTok{);}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:-2828168,0,10>
+\end{verbatim}
+
+\#Table Defination airline\_operator
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query}\OtherTok{\textless{}{-}}\NormalTok{(}\StringTok{"}
+\StringTok{  CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}airline\_operator\textasciigrave{} (}
+\StringTok{  \textasciigrave{}AirlineOperatorId\textasciigrave{} INT NOT NULL AUTO\_INCREMENT,}
+\StringTok{  \textasciigrave{}AirlineOperator\textasciigrave{} VARCHAR(45) DEFAULT \textquotesingle{} \textquotesingle{} NULL UNIQUE,}
+\StringTok{  PRIMARY KEY (\textasciigrave{}AirlineOperatorId\textasciigrave{}));"}\NormalTok{);}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:NA,0,11>
+\end{verbatim}
+
+\#Table Defination airline\_aircrafts
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query }\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"}
+\StringTok{  CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}airline\_aircrafts\textasciigrave{} (}
+\StringTok{  \textasciigrave{}PlaneID\textasciigrave{} INT NOT NULL AUTO\_INCREMENT,}
+\StringTok{  \textasciigrave{}AircraftTypeID\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}AirlineOperatorID\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}NumberOfEngines\textasciigrave{} INT  DEFAULT 0 NULL,}
+\StringTok{  CONSTRAINT unique\_constraint UNIQUE (AircraftTypeID,AirlineOperatorID,NumberOfEngines),}
+\StringTok{  PRIMARY KEY (\textasciigrave{}PlaneID\textasciigrave{}),}
+\StringTok{  FOREIGN KEY (\textasciigrave{}AircraftTypeID\textasciigrave{}) REFERENCES practicum1.\textasciigrave{}aircraft\textasciigrave{} (\textasciigrave{}AircraftTypeID\textasciigrave{}),}
+\StringTok{  FOREIGN KEY (\textasciigrave{}AirlineOperatorID\textasciigrave{}) REFERENCES practicum1.\textasciigrave{}airline\_operator\textasciigrave{} (\textasciigrave{}AirlineOperatorId\textasciigrave{}));}
+\StringTok{  }
+\StringTok{  "}\NormalTok{);}
+
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:0,0,12>
+\end{verbatim}
+
+\#Table Defination wildlife
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query }\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"}
+\StringTok{  CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}wildlife\textasciigrave{} (}
+\StringTok{  \textasciigrave{}WildlifeID\textasciigrave{} INT NOT NULL AUTO\_INCREMENT,}
+\StringTok{  \textasciigrave{}Species\textasciigrave{} VARCHAR(45) DEFAULT \textquotesingle{} \textquotesingle{} NULL,}
+\StringTok{  \textasciigrave{}Size\textasciigrave{} ENUM(\textquotesingle{}Small\textquotesingle{}, \textquotesingle{}Medium\textquotesingle{}, \textquotesingle{}Large\textquotesingle{}) DEFAULT \textquotesingle{}Small\textquotesingle{} NULL,}
+\StringTok{  CONSTRAINT unique\_constraint UNIQUE (Species, Size),}
+\StringTok{  PRIMARY KEY (\textasciigrave{}WildlifeID\textasciigrave{}));"}\NormalTok{);}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:1,0,13>
+\end{verbatim}
+
+\#Table Defination precipitation\_type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query }\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"}
+\StringTok{  CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}precipitation\_type\textasciigrave{} (}
+\StringTok{  \textasciigrave{}PrecipitationID\textasciigrave{} INT NOT NULL AUTO\_INCREMENT,}
+\StringTok{  \textasciigrave{}Precipitation\_Type\textasciigrave{} VARCHAR(45) DEFAULT \textquotesingle{} \textquotesingle{} NULL UNIQUE,}
+\StringTok{  PRIMARY KEY (\textasciigrave{}PrecipitationID\textasciigrave{}));"}\NormalTok{);}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:0,0,14>
+\end{verbatim}
+
+\#Table Defination precipitation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query }\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"}
+\StringTok{  CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}precipitation\textasciigrave{} (}
+\StringTok{  \textasciigrave{}RecordID\textasciigrave{} INT NOT NULL,}
+\StringTok{  \textasciigrave{}PrecipitationID\textasciigrave{} INT NOT NULL,}
+\StringTok{  PRIMARY KEY (\textasciigrave{}RecordID\textasciigrave{}, \textasciigrave{}PrecipitationID\textasciigrave{}),}
+\StringTok{  FOREIGN KEY (\textasciigrave{}PrecipitationID\textasciigrave{}) REFERENCES practicum1.\textasciigrave{}precipitation\_type\textasciigrave{} (\textasciigrave{}PrecipitationID\textasciigrave{}));"}\NormalTok{);}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:-60977808,0,15>
+\end{verbatim}
+
+\#Table Defination airport
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query }\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{"}
+\StringTok{  CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}airport\textasciigrave{} (}
+\StringTok{  \textasciigrave{}AirportID\textasciigrave{} INT NOT NULL AUTO\_INCREMENT,}
+\StringTok{  \textasciigrave{}Name\textasciigrave{} VARCHAR(45) DEFAULT \textquotesingle{} \textquotesingle{} NULL,}
+\StringTok{  \textasciigrave{}State\textasciigrave{} VARCHAR(45) DEFAULT \textquotesingle{} \textquotesingle{} NULL,}
+\StringTok{  CONSTRAINT unique\_constraint UNIQUE (Name,State),}
+\StringTok{  PRIMARY KEY (\textasciigrave{}AirportID\textasciigrave{}));"}\NormalTok{);}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:0,0,16>
+\end{verbatim}
+
+\#Table Defination bird\_strike\_incident
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query }\OtherTok{\textless{}{-}}\NormalTok{ (}\StringTok{\textquotesingle{}CREATE TABLE IF NOT EXISTS practicum1.\textasciigrave{}bird\_strike\_incident\textasciigrave{} (}
+\StringTok{  \textasciigrave{}RecordID\textasciigrave{} INT NOT NULL AUTO\_INCREMENT,}
+\StringTok{  \textasciigrave{}FlightDate\textasciigrave{} DATETIME NULL,}
+\StringTok{  \textasciigrave{}WildLife\_NumberOfStruck\textasciigrave{} VARCHAR(80) NULL,}
+\StringTok{  \textasciigrave{}WildLife\_NumberOfStruckActual\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}Effect\_ImpactToFlight\textasciigrave{} VARCHAR(80) NULL,}
+\StringTok{  \textasciigrave{}Altitude\_Bin\textasciigrave{} VARCHAR(10) NULL,}
+\StringTok{  \textasciigrave{}EffectIndicatedDamage\textasciigrave{} VARCHAR(20) NULL,}
+\StringTok{  \textasciigrave{}PhaseOfFlight\textasciigrave{} ENUM("Approach", "Climb", "Descent", "Landing Roll", "Take{-}off run", "Taxi") NULL,}
+\StringTok{  \textasciigrave{}WildLifeRemainsCollected\textasciigrave{} VARCHAR(50) NULL,}
+\StringTok{  \textasciigrave{}WildLifeRemainsSent\textasciigrave{} VARCHAR(50) NULL,}
+\StringTok{  \textasciigrave{}Remarks\textasciigrave{} LONGTEXT NULL,}
+\StringTok{  \textasciigrave{}PilotWarned\textasciigrave{} VARCHAR(50) NULL,}
+\StringTok{  \textasciigrave{}Cost\_Total\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}FeetAboveGround\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}PeopleInjured\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}ConditionsSky\textasciigrave{} VARCHAR(50) NULL,}
+\StringTok{  \textasciigrave{}PlaneID\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}WildlifeID\textasciigrave{} INT NULL,}
+\StringTok{  \textasciigrave{}AirportID\textasciigrave{} INT NULL,}
+\StringTok{  PRIMARY KEY (\textasciigrave{}RecordID\textasciigrave{}),}
+\StringTok{  FOREIGN KEY (\textasciigrave{}PlaneID\textasciigrave{}) REFERENCES practicum1.\textasciigrave{}airline\_aircrafts\textasciigrave{} (\textasciigrave{}PlaneID\textasciigrave{}),}
+\StringTok{  FOREIGN KEY (\textasciigrave{}WildlifeID\textasciigrave{}) REFERENCES practicum1.\textasciigrave{}wildlife\textasciigrave{} (\textasciigrave{}WildlifeID\textasciigrave{}),}
+\StringTok{  FOREIGN KEY (\textasciigrave{}AirportID\textasciigrave{}) REFERENCES practicum1.\textasciigrave{}airport\textasciigrave{} (\textasciigrave{}AirportID\textasciigrave{}));\textquotesingle{}}\NormalTok{);}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:0,0,17>
+\end{verbatim}
+
+\#Loading data into aircraft table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aircraft }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{\textquotesingle{}SELECT DISTINCT "Aircraft..Make.Model" AS Make\_Model, "Aircraft..Type" AS Type, "Is.Aircraft.Large." AS IsAircraftLarge  FROM df1\textquotesingle{}}\NormalTok{)}
+\NormalTok{aircraft[aircraft}\SpecialCharTok{$}\NormalTok{IsAircraftLarge }\SpecialCharTok{==} \StringTok{"Yes"}\NormalTok{,]}\SpecialCharTok{$}\NormalTok{IsAircraftLarge }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{aircraft[aircraft}\SpecialCharTok{$}\NormalTok{IsAircraftLarge }\SpecialCharTok{==} \StringTok{"No"}\NormalTok{,]}\SpecialCharTok{$}\NormalTok{IsAircraftLarge }\OtherTok{\textless{}{-}} \DecValTok{0}
+\CommentTok{\#aircraft}
+\CommentTok{\#aircraft$AircraftTypeID\textless{}{-} 1:354}
+\NormalTok{aircraft}\SpecialCharTok{$}\NormalTok{IsAircraftLarge}\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(aircraft}\SpecialCharTok{$}\NormalTok{IsAircraftLarge)}
+\FunctionTok{dbWriteTable}\NormalTok{(mydb, }\AttributeTok{name =} \StringTok{"aircraft"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ aircraft, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{overwrite =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\#Loading into airpline\_operator table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airline\_operator }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{\textquotesingle{}SELECT DISTINCT "Aircraft..Airline.Operator" AS AirlineOperator FROM df1\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#airline\_operator}
+\CommentTok{\#airline\_operator$AirlineOperatorID \textless{}{-} 1:293}
+\FunctionTok{dbWriteTable}\NormalTok{(mydb, }\AttributeTok{name =} \StringTok{"airline\_operator"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ airline\_operator, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\#Loading into airline\_aircrafts table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aircraft }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}aircraft\textasciigrave{};"}\NormalTok{)}
+
+\NormalTok{airline\_operator }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}airline\_operator\textasciigrave{};"}\NormalTok{)}
+
+\NormalTok{airline\_aircrafts }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT DISTINCT aircraft.AircraftTypeID, airline\_operator.airlineOperatorID, df1.\textasciigrave{}Aircraft..Number.of.engines.\textasciigrave{} AS \textasciigrave{}NumberOfEngines\textasciigrave{} }
+\StringTok{                           FROM aircraft INNER JOIN airline\_operator INNER JOIN df1}
+\StringTok{                           WHERE aircraft.\textasciigrave{}Make\_Model\textasciigrave{} = df1.\textasciigrave{}Aircraft..Make.Model\textasciigrave{} AND }
+\StringTok{                           airline\_operator.AirlineOperator = df1.\textasciigrave{}Aircraft..Airline.Operator\textasciigrave{};"}\NormalTok{)}
+
+\FunctionTok{dbWriteTable}\NormalTok{(mydb, }\AttributeTok{name =} \StringTok{"airline\_aircrafts"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ airline\_aircrafts, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{overwrite =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\#Loading into wildlife table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wildlife }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{\textquotesingle{}SELECT DISTINCT "Wildlife..Species" AS Species, "Wildlife..Size" AS Size }
+\StringTok{                  FROM df1\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#If dbWriteTable}
+\CommentTok{\#wildlife$WildlifeID \textless{}{-} 1:395}
+\CommentTok{\#wildlife}
+\FunctionTok{dbWriteTable}\NormalTok{(mydb, }\AttributeTok{name =} \StringTok{"wildlife"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ wildlife, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\#Loading into airport table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airport }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{\textquotesingle{}SELECT DISTINCT "Airport..Name" AS NAME, "Origin.State" AS State FROM df1\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#airport}
+\CommentTok{\#airport$AirportID\textless{}{-} 1:1141}
+\FunctionTok{dbWriteTable}\NormalTok{(mydb, }\AttributeTok{name =} \StringTok{"airport"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ airport, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\#Loading data into precipitation\_type table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{precipitation\_type }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{\textquotesingle{}SELECT DISTINCT "Conditions..Precipitation" AS Precipitation\_Type }
+\StringTok{                            FROM df1 }
+\StringTok{                            WHERE Precipitation\_Type NOT LIKE "\%,\%"\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#precipitation\_type}
+\FunctionTok{dbWriteTable}\NormalTok{(mydb, }\AttributeTok{name =} \StringTok{"precipitation\_type"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ precipitation\_type, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\#Loading data into precipitation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{precipitation\_type }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}precipitation\_type\textasciigrave{};"}\NormalTok{)}
+
+\NormalTok{precipitation }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT df2.\textasciigrave{}Record.ID\textasciigrave{} AS RecordID, PrecipitationID }
+\StringTok{                       FROM df2 INNER JOIN precipitation\_type }
+\StringTok{                       ON df2.\textquotesingle{}Conditions..Precipitation\textquotesingle{}= precipitation\_type.Precipitation\_Type;"}\NormalTok{)}
+\FunctionTok{dbWriteTable}\NormalTok{(mydb, }\AttributeTok{name =} \StringTok{"precipitation"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ precipitation, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\#Loading data into bird\_strike\_incident table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cname }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Record.ID"}\NormalTok{, }\StringTok{"FlightDate"}\NormalTok{, }\StringTok{"Wildlife..Number.struck"}\NormalTok{, }\StringTok{"Wildlife..Number.Struck.Actual"}\NormalTok{, }\StringTok{"Effect..Impact.to.flight"}\NormalTok{, }\StringTok{"Altitude.bin"}\NormalTok{, }\StringTok{"Effect..Indicated.Damage"}\NormalTok{, }\StringTok{"When..Phase.of.flight"}\NormalTok{, }\StringTok{"Remains.of.wildlife.collected."}\NormalTok{, }\StringTok{"Remains.of.wildlife.sent.to.Smithsonian"}\NormalTok{, }\StringTok{"Remarks"}\NormalTok{, }\StringTok{"Conditions..Sky"}\NormalTok{, }\StringTok{"Pilot.warned.of.birds.or.wildlife."}\NormalTok{, }\StringTok{"Cost..Total.."}\NormalTok{, }\StringTok{"Feet.above.ground"}\NormalTok{, }\StringTok{"Number.of.people.injured"}\NormalTok{)}
+
+\NormalTok{bird\_strike\_incident }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(cname))}
+\NormalTok{bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{FlightDate }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{FlightDate, }\AttributeTok{format =} \StringTok{"\%m/\%d/\%Y"}\NormalTok{)}
+
+\NormalTok{airport }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}airport\textasciigrave{};"}\NormalTok{)}
+\NormalTok{bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{AirportID }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT DISTINCT \textasciigrave{}Record.ID\textasciigrave{}, AirportID }
+\StringTok{         FROM df1 INNER JOIN airport }
+\StringTok{         ON df1.\textquotesingle{}Airport..Name\textquotesingle{} = airport.Name AND df1.\textasciigrave{}Origin.State\textasciigrave{} = airport.State "}\NormalTok{)}
+\NormalTok{bird\_strike\_incident[bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{Record.ID }\SpecialCharTok{==}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{Record.ID, ]}\SpecialCharTok{$}\NormalTok{AirportID}\OtherTok{\textless{}{-}}\NormalTok{x[bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{Record.ID }\SpecialCharTok{==}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{Record.ID,]}\SpecialCharTok{$}\NormalTok{AirportID}
+
+\NormalTok{wildlife }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}wildlife\textasciigrave{};"}\NormalTok{)}
+
+\NormalTok{bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{WildlifeID}\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT DISTINCT df1.\textquotesingle{}Record.ID\textquotesingle{},wildlife.WildlifeID FROM df1 INNER JOIN wildlife ON df1.\textasciigrave{}Wildlife..Species\textasciigrave{}= wildlife.Species AND df1.\textasciigrave{}Wildlife..Size\textasciigrave{} = wildlife.Size"}\NormalTok{)}
+\FunctionTok{suppressWarnings}\NormalTok{(bird\_strike\_incident[bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{Record.ID }\SpecialCharTok{==}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{Record.ID,]}\SpecialCharTok{$}\NormalTok{WildlifeID }\OtherTok{\textless{}{-}}\NormalTok{ x[bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{Record.ID }\SpecialCharTok{==}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{Record.ID,]}\SpecialCharTok{$}\NormalTok{WildlifeID)}
+
+\NormalTok{aircraft }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}aircraft\textasciigrave{};"}\NormalTok{)}
+\NormalTok{airline\_operator }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}airline\_operator\textasciigrave{};"}\NormalTok{)}
+\NormalTok{airline\_aircrafts }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM \textasciigrave{}airline\_aircrafts\textasciigrave{};"}\NormalTok{)}
+
+\NormalTok{bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{PlaneID}\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT DISTINCT PlaneID, Make\_Model, AirlineOperator, NumberOfEngines }
+\StringTok{            FROM aircraft INNER JOIN airline\_operator INNER JOIN airline\_aircrafts}
+\StringTok{            WHERE airline\_aircrafts.AircraftTypeID = aircraft.AircraftTypeID AND airline\_aircrafts.AirlineOperatorID = airline\_operator.AirlineOperatorID"}\NormalTok{)}
+
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT DISTINCT df1.\textquotesingle{}Record.ID\textquotesingle{}, x1.\textasciigrave{}PlaneID\textasciigrave{}}
+\StringTok{         FROM df1 INNER JOIN x1}
+\StringTok{         WHERE df1.\textasciigrave{}Aircraft..Make.Model\textasciigrave{} = x1.Make\_Model AND df1.\textasciigrave{}Aircraft..Airline.Operator\textasciigrave{} = x1.AirlineOperator AND df1.\textasciigrave{}Aircraft..Number.of.engines.\textasciigrave{} = x1.NumberOfEngines;"}\NormalTok{)}
+
+\FunctionTok{suppressWarnings}\NormalTok{(bird\_strike\_incident[bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{Record.ID }\SpecialCharTok{==}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{Record.ID,]}\SpecialCharTok{$}\NormalTok{PlaneID }\OtherTok{\textless{}{-}}\NormalTok{ x[bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{Record.ID }\SpecialCharTok{==}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{Record.ID,]}\SpecialCharTok{$}\NormalTok{PlaneID)}
+
+\FunctionTok{colnames}\NormalTok{(bird\_strike\_incident) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"RecordID"}\NormalTok{, }\StringTok{"FlightDate"}\NormalTok{, }\StringTok{"WildLife\_NumberOfStruck"}\NormalTok{, }\StringTok{"Wildlife\_NumberOfStruckActual"}\NormalTok{, }\StringTok{"Effect\_ImpactToFlight"}\NormalTok{, }\StringTok{"Altitude\_Bin"}\NormalTok{, }\StringTok{"EffectIndicatedDamage"}\NormalTok{, }\StringTok{"PhaseOfFlight"}\NormalTok{, }\StringTok{"WildLifeRemainsCollected"}\NormalTok{, }\StringTok{"WildLifeRemainsSent"}\NormalTok{, }\StringTok{"Remarks"}\NormalTok{, }\StringTok{"ConditionsSky"}\NormalTok{, }\StringTok{"PilotWarned"}\NormalTok{, }\StringTok{"Cost\_Total"}\NormalTok{, }\StringTok{"FeetAboveGround"}\NormalTok{, }\StringTok{"PeopleInjured"}\NormalTok{, }\StringTok{"AirportID"}\NormalTok{, }\StringTok{"WildlifeID"}\NormalTok{, }\StringTok{"PlaneID"}\NormalTok{)}
+\FunctionTok{dbWriteTable}\NormalTok{(mydb,  }\AttributeTok{name =} \StringTok{"bird\_strike\_incident"}\NormalTok{, }\AttributeTok{value=}\NormalTok{ bird\_strike\_incident[], }\AttributeTok{append =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{row.names=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#dbSendQuery(mydb, "ALTER TABLE bird\_strike\_incidentSET CONSTRAINT \textasciigrave{}RecordID\textasciigrave{} PRIMARY KEY")}
+\CommentTok{\#dbGetQuery(mydb, "SELECT * FROM bird\_strike\_incident")}
+\end{Highlighting}
+\end{Shaded}
+
+\#Printing Loaded Data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airport }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM airport"}\NormalTok{)}
+\NormalTok{aircraft }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM aircraft"}\NormalTok{)}
+\NormalTok{airline\_aircrafts }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM airline\_aircrafts"}\NormalTok{)}
+\NormalTok{precipitation }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM precipitation"}\NormalTok{)}
+\NormalTok{precipitation\_type }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM precipitation\_type"}\NormalTok{)}
+\NormalTok{airline\_operator }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM airline\_operator"}\NormalTok{)}
+\NormalTok{wildlife }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(mydb, }\StringTok{"SELECT * FROM wildlife"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(airport)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   AirportID Name      State
+## 1       696         Alabama
+## 2       675          Alaska
+## 3       913         Arizona
+## 4       850        Arkansas
+## 5       533      California
+## 6       588         Florida
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(aircraft)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   AircraftTypeID Type    Make_Model IsAircraftLarge
+## 1            180          AEROS 350              NA
+## 2            297          AEROS 355              NA
+## 3            213        AEROS SA365              NA
+## 4            242         AGUSTA 109              NA
+## 5            312      AGUSTA AW 139              NA
+## 6            319         BELL-205A1              NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(airline\_aircrafts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   PlaneID AircraftTypeID AirlineOperatorID NumberOfEngines
+## 1     281              1                 1               2
+## 2     274              1                 3               2
+## 3     273              1                 4               2
+## 4     275              1                13               2
+## 5     271              1                14               2
+## 6     278              1                29               2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(airline\_operator)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   AirlineOperatorId             AirlineOperator
+## 1                39                            
+## 2               239 ABSA AEROLINHAS BRASILEIRAS
+## 3                18                     ABX AIR
+## 4               115                ACM AVIATION
+## 5               171           ADI SHUTTLE GROUP
+## 6               168                  AER LINGUS
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(wildlife)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   WildlifeID             Species   Size
+## 1        232  Acadian flycatcher  Small
+## 2        265  American alligator  Large
+## 3        136     American avocet  Small
+## 4        271    American bittern Medium
+## 5        149 American black duck Medium
+## 6        391       American coot
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(precipitation)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   RecordID PrecipitationID
+## 1     1195               1
+## 2     3019               1
+## 3     3500               1
+## 4     3504               1
+## 5     3597               1
+## 6     4064               1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(precipitation\_type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   PrecipitationID Precipitation_Type
+## 1               3                Fog
+## 2               1               None
+## 3               4               Rain
+## 4               2               Snow
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(bird\_strike\_incident)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   RecordID FlightDate WildLife_NumberOfStruck Wildlife_NumberOfStruckActual
+## 1   202152 2000-11-23                Over 100                           859
+## 2   208159 2001-07-25                Over 100                           424
+## 3   207601 2001-09-14                Over 100                           261
+## 4   215953 2002-09-05                Over 100                           806
+## 5   219878 2003-06-23                Over 100                           942
+## 6   218432 2003-07-24                Over 100                           537
+##   Effect_ImpactToFlight Altitude_Bin EffectIndicatedDamage PhaseOfFlight
+## 1      Engine Shut Down    > 1000 ft         Caused damage         Climb
+## 2                  None    < 1000 ft         Caused damage  Landing Roll
+## 3                  None    < 1000 ft             No damage      Approach
+## 4 Precautionary Landing    < 1000 ft             No damage         Climb
+## 5                  None    < 1000 ft             No damage      Approach
+## 6                  None    < 1000 ft             No damage  Take-off run
+##   WildLifeRemainsCollected WildLifeRemainsSent
+## 1                    FALSE               FALSE
+## 2                    FALSE               FALSE
+## 3                    FALSE               FALSE
+## 4                     TRUE               FALSE
+## 5                    FALSE               FALSE
+## 6                    FALSE               FALSE
+##                                                                                                                                                                                                                                                           Remarks
+## 1  FLT 753. PILOT REPTD A HUNDRED BIRDS ON UNKN TYPE. #1 ENG WAS SHUT DOWN AND DIVERTED TO EWR. SLIGHT VIBRATION. A/C WAS OUT OF SVC FOR REPAIRS TO COWLING, FAN DUCT ACCOUSTIC PANEL. INGESTION. DENTED FAN BLADE #26 IN #1 ENG. HEAVY BLOOD STAINS ON L WINGTIP
+## 2                                                                                                                                                                                         102 CARCASSES FOUND. 1 LDG LIGHT ON NOSE GEAR WAS DAMAGED AND REPLACED.
+## 3                                                                                                                                                FLEW UNDER A VERY LARGE FLOCK OF BIRDS OVER APCH END OF RWY. NO DMG. JUST A LOT OF BIRD DROPPINGS ON WINDSCREEN.
+## 4 NOTAM WARNING. 26 BIRDS HIT THE A/C, FORCING AN EMERGENCY LDG. 77 BIRDS WERE FOUND DEAD ON RWY/TWY WITH GRASSHOPPERS IN THEIR STOMACHS. SAFETY AREAS COULD NOT BE THOROUGHLY INSPCTD DURING 14 MINUTE SHUTDOWN OF RWY 34L. NO DMG. A/C OUT OF SVC 40 MINS. PHOT
+## 5                                                                                                                                                                                                                                                   NO DMG REPTD.
+## 6                                                                                                                                                                                                                         NO DMG. BIRD REMAINS ON F/O WINDSCREEN.
+##   ConditionsSky PilotWarned Cost_Total FeetAboveGround PeopleInjured AirportID
+## 1      No Cloud           N      30736            1500             0         1
+## 2    Some Cloud           Y          0               0             0         2
+## 3      No Cloud           N          0              50             0         3
+## 4    Some Cloud           Y          0              50             0         4
+## 5      No Cloud           N          0              50             0         5
+## 6      No Cloud           N          0               0             0         6
+##   WildlifeID PlaneID
+## 1          1     281
+## 2          2    1213
+## 3          3     688
+## 4          3     273
+## 5          3     788
+## 6          4      36
+\end{verbatim}
+
+\#Create a SQL query against your database to find the number of bird
+strike incidents for each airport upon take-off or climb. Include all
+airlines.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT A.Name, COUNT(RecordID) AS NumberOfBirdStrikeIncidents FROM bird\_strike\_incident AS B INNER JOIN airport AS A ON B.AirportID = A.AirportID}
+\StringTok{          GROUP BY B.AirportID"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                               Name NumberOfBirdStrikeIncidents
+## 1                                     LAGUARDIA NY                         263
+## 2                      DALLAS/FORT WORTH INTL ARPT                         803
+## 3                                LAKEFRONT AIRPORT                          15
+## 4                              SEATTLE-TACOMA INTL                         137
+## 5                                     NORFOLK INTL                         103
+## 6                              GUAYAQUIL/S BOLIVAR                           6
+## 7                                NEW CASTLE COUNTY                          25
+## 8                      WASHINGTON DULLES INTL ARPT                         270
+## 9                                     ATLANTA INTL                         296
+## 10                    ORLANDO SANFORD INTL AIRPORT                          92
+## 11                               ONTARIO INTL ARPT                         145
+## 12                        CHICAGO O'HARE INTL ARPT                         332
+## 13                            GROTON-NEW LONDON AR                          64
+## 14                              SPIRIT OF ST LOUIS                          10
+## 15                    THEODORE FRANCIS GREEN STATE                         111
+## 16                                KANSAS CITY INTL                         452
+## 17                                      LIHUE ARPT                         195
+## 18                              PHOENIX SKY HARBOR                         196
+## 19                                  NASHVILLE INTL                         364
+## 20                     JIM HAMILTON L B OWENS ARPT                           2
+## 21                     SOUTHWEST FLORIDA INTL ARPT                         215
+## 22                            ABERDEEN REGIONAL AR                          17
+## 23                        NEWARK LIBERTY INTL ARPT                         305
+## 24                            ASPEN-PITKIN CO/SARD                           7
+## 25                                  ROCHESTER INTL                          32
+## 26                        MINNEAPOLIS-ST PAUL INTL                         251
+## 27                            PUEBLO MEMORIAL ARPT                          13
+## 28                         WESTCHESTER COUNTY ARPT                         130
+## 29                   BIRMINGHAM-SHUTTLESWORTH INTL                         211
+## 30                                     TAHITI FAAA                           2
+## 31                                    ORLANDO INTL                         408
+## 32                               MYRTLE BEACH INTL                          39
+## 33                         LAFAYETTE REGIONAL (LA)                          18
+## 34                     CLEVELAND-HOPKINS INTL ARPT                         214
+## 35                         SAN FRANCISCO INTL ARPT                         226
+## 36                          CENTRAL WISCONSIN ARPT                           5
+## 37                   BARKSDALE AIR FORCE BASE ARPT                          39
+## 38                 DETROIT METRO WAYNE COUNTY ARPT                         321
+## 39                             TOLEDO EXPRESS ARPT                          38
+## 40                              METRO OAKLAND INTL                         252
+## 41                          BEVERLY MUNICIPAL ARPT                           7
+## 42                      TED STEVENS ANCHORAGE INTL                          50
+## 43                     CHARLOTTE/DOUGLAS INTL ARPT                         367
+## 44          CINCINNATI/NORTHERN KENTUCKY INTL ARPT                         302
+## 45                    GREATER PEORIA REGIONAL ARPT                          30
+## 46                               INDIANAPOLIS INTL                         160
+## 47                            LOUISVILLE INTL ARPT                         395
+## 48                              PORTLAND INTL (OR)                         313
+## 49                            STEWART INTL AIRPORT                          26
+## 50                                LOS ANGELES INTL                         217
+## 51                                 BURKE LAKEFRONT                          65
+## 52                               PHILADELPHIA INTL                         442
+## 53                               CAPITAL CITY (MI)                          37
+## 54                               CAPITAL (BEIJING)                           1
+## 55                            PEASE INTL TRADEPORT                          18
+## 56                                   SAVANNAH INTL                          97
+## 57                                  HILO INTL ARPT                         112
+## 58                  FORT LAUDERDALE/HOLLYWOOD INTL                         277
+## 59                          DALLAS LOVE FIELD ARPT                         253
+## 60                                      LOGAN INTL                         255
+## 61                             DENVER INTL AIRPORT                         476
+## 62                     KALAMAZOO/BATTLE CREEK INTL                          31
+## 63                              GERALD R FORD INTL                         115
+## 64                       FORT SMITH MUNICIPAL ARPT                          15
+## 65                                   MCCARREN INTL                         102
+## 66                         HESLER-NOBLE FIELD ARPT                           3
+## 67                              PENSACOLA REGIONAL                          68
+## 68                             BALTIMORE WASH INTL                         401
+## 69                              LAURENCE G HANSCOM                          29
+## 70                   PANAMA CITY - BAY COUNTY INTL                          26
+## 71                                       SUVA FIJI                           1
+## 72                                     OXNARD ARPT                          14
+## 73                       MORRISTOWN MUNICIPAL ARPT                          56
+## 74                             TRENTON MERCER ARPT                          18
+## 75                               TETERBORO AIRPORT                         126
+## 76                           SANFORD REGIONAL ARPT                           1
+## 77                                    MEMPHIS INTL                         138
+## 78                          GREATER ROCHESTER INTL                          40
+## 79                                    SAINT HUBERT                           1
+## 80                             RALEIGH-DURHAM INTL                         165
+## 81                                  DUPAGE AIRPORT                          19
+## 82                                ROANOKE REGIONAL                          55
+## 83                                                                          14
+## 84                               EL PASO INTL ARPT                          58
+## 85                                 PALM BEACH INTL                          60
+## 86                      LEWISTON-NEZ PERCE CO ARPT                          12
+## 87                              BLOOMINGTON/NORMAL                          23
+## 88                      INDIANAPOLIS REGIONAL ARPT                           4
+## 89                              JACKSON EVERS INTL                          50
+## 90                                  VANCOUVER INTL                          11
+## 91                              LEHIGH VALLEY INTL                          63
+## 92                             SALT LAKE CITY INTL                         479
+## 93                                  QUAD CITY ARPT                         109
+## 94                              PORT COLUMBUS INTL                         166
+## 95                                 EPPLEY AIRFIELD                         269
+## 96                                   BOB HOPE ARPT                          97
+## 97                           GENERAL MITCHELL INTL                         128
+## 98                            FRESNO YOSEMITE INTL                          34
+## 99                            UNIVERSITY PARK ARPT                           4
+## 100                     COLORADO SPRINGS MUNICIPAL                          83
+## 101                                FORT WAYNE INTL                          46
+## 102                              KEARNEY MUNICIPAL                           2
+## 103                                   TOCUMEN INTL                          22
+## 104                         WATERLOO REGIONAL ARPT                          10
+## 105                           SANTO DOMINGO/LAS AM                          16
+## 106                                    ALBANY INTL                          96
+## 107                                SACRAMENTO INTL                         676
+## 108                            JOHN F KENNEDY INTL                         390
+## 109                           BUFFALO-NIAGARA INTL                         182
+## 110                           AUSTIN STRAUBEL INTL                          20
+## 111                                DES MOINES INTL                         140
+## 112                         WAUKEGAN REGIONAL ARPT                           9
+## 113                  RONALD REAGAN WASHINGTON NATL                         162
+## 114                       CHARLESTON AFB/INTL ARPT                          49
+## 115                              LOVELL FIELD ARPT                          85
+## 116                        JAMES M COX DAYTON INTL                          60
+## 117                                PUERTO VALLARTA                           7
+## 118                               ALBUQUERQUE INTL                          82
+## 119                                     MIAMI INTL                         202
+## 120           JOSLIN FIELD - MAGIC VALLEY REGIONAL                           3
+## 121                             GREATER PITTSBURGH                         237
+## 122                            TROY MUNICIPAL ARPT                           1
+## 123                        SHEPPARD AIR FORCE BASE                          28
+## 124                               NEW ORLEANS INTL                         219
+## 125                          LAMBERT-ST LOUIS INTL                         363
+## 126                             MINISTRO PISTARINI                          16
+## 127                            BRACKETT FIELD ARPT                          14
+## 128                                  HOUSTON-HOBBY                         294
+## 129                   GEORGE BUSH INTERCONTINENTAL                         199
+## 130                          RENTON MUNICIPAL ARPT                           6
+## 131                          THE EASTERN IOWA ARPT                          45
+## 132                           NORTH BEND MUNICIPAL                           6
+## 133                                HARRISBURG INTL                         131
+## 134                        SANTA BARBARA MUNICIPAL                          71
+## 135                                   BRADLEY INTL                         136
+## 136                                 SAN DIEGO INTL                          99
+## 137                                    YEAGER ARPT                          32
+## 138                       CHICAGO MIDWAY INTL ARPT                         296
+## 139                              CHARLES DE GAULLE                          16
+## 140                              ARDMORE MUNICIPAL                           2
+## 141                             SARASOTA-BRADENTON                          37
+## 142           MONTREAL/PIERRE-ELLIOTT-TRUDEAU INTL                           6
+## 143                           TALLAHASSEE REGIONAL                          17
+## 144                                  UNALASKA ARPT                          10
+## 145               FULTON COUNTY ARPT - BROWN FIELD                           7
+## 146                       GOLDEN TRIANGLE REGIONAL                           4
+## 147                       GULFPORT BILOXI REGIONAL                          40
+## 148                           MINETA SAN JOSE INTL                         201
+## 149                                HUNTSVILLE INTL                          28
+## 150                             JAMESTOWN REGIONAL                           3
+## 151                               AIRBORNE AIRPARK                         112
+## 152                            EVANSVILLE REGIONAL                          32
+## 153                          SPOKANE INTERNATIONAL                          39
+## 154                             SMITH REYOLDS ARPT                           2
+## 155                              LITTLE RIVER ARPT                           1
+## 156                          CONCORD REGIONAL ARPT                           1
+## 157                                  AMARILLO INTL                          19
+## 158               COBB COUNTY ARPT-MC COLLUM FIELD                           3
+## 159                         DANBURY MUNICIPAL ARPT                           9
+## 160                       RALPH WIEN MEMORIAL ARPT                           4
+## 161                   COLUMBUS MUNICIPAL ARPT (IN)                          19
+## 162                                  VAN NUYS ARPT                          49
+## 163                          AUSTIN-BERGSTROM INTL                         236
+## 164                              OAKLAND/TROY ARPT                           3
+## 165                                BURLINGTON INTL                          33
+## 166                                 KODIAK AIRPORT                           7
+## 167                               NAPA COUNTY ARPT                          15
+## 168                                 EXECUTIVE ARPT                          31
+## 169                               WHITEMAN AIRPORT                           6
+## 170                 SCHOLES INTL ARPT AT GALVESTON                           3
+## 171                               ADAMS FIELD ARPT                          67
+## 172                          MONTGOMERY FIELD ARPT                           6
+## 173                       PHOENIX DEER VALLEY ARPT                          24
+## 174                                  SKYLARK FIELD                           6
+## 175                        GREATER BINGHAMTON ARPT                          16
+## 176                            KLEBERG COUNTY ARPT                           2
+## 177                                JOPLIN REGIONAL                           7
+## 178                       JONESBORO MUNICIPAL ARPT                           1
+## 179                             HONOLULU INTL ARPT                         170
+## 180             EGLIN AFB/NW FLORIDA REGIONAL ARPT                           8
+## 181                             SIOUX GATEWAY ARPT                           8
+## 182                               SAN ANTONIO INTL                         194
+## 183                                    VALLEY INTL                          36
+## 184                                   JACKSON HOLE                           9
+## 185                             JOHN WAYNE AIRPORT                          60
+## 186                            DILLINGHAM AIRFIELD                           5
+## 187                            SHREVEPORT REGIONAL                          17
+## 188                             MCMINN COUNTY ARPT                           1
+## 189                           CUYAHOGA COUNTY ARPT                           9
+## 190                             MANCHESTER AIRPORT                          88
+## 191                     PORTLAND INTL JETPORT (ME)                          27
+## 192                   JEFFERSON CITY MEMORIAL ARPT                           3
+## 193                           NW ARKANSAS REGIONAL                          20
+## 194                     WICHITA MID-CONTINENT ARPT                          55
+## 195                             TYLER POUNDS FIELD                           8
+## 196                                        ADDISON                          32
+## 197                              OWENSBORO-DAVIESS                           7
+## 198                             ATLANTIC CITY INTL                          70
+## 199                         LONG ISLAND MAC ARTHUR                          86
+## 200                           ELLINGTON FIELD ARPT                          25
+## 201                            LANCASTER ARPT (PA)                           4
+## 202                                 AQUASCALIENTES                           2
+## 203                    NORTHEAST PHILADELPHIA ARPT                          12
+## 204                              LINCOLN MUNICIPAL                          65
+## 205                                SAN CARLOS ARPT                           3
+## 206                       IGOR I SIKORSKY MEMORIAL                           9
+## 207                      MORGANTOWN MUNICIPAL ARPT                          10
+## 208                     SITKA ROCKY GUTIERREZ ARPT                          28
+## 209                           GAINESVILLE REG ARPT                           8
+## 210                 TRI-CITIES REGIONAL TN/VA ARPT                          18
+## 211                          ALLEGHENY COUNTY ARPT                          12
+## 212                              JACKSONVILLE INTL                         155
+## 213                           PIERRE REGIONAL ARPT                           3
+## 214                 NEWPORT NEWS/WILLIAMSBURG INTL                          52
+## 215                        MANLEY HOT SPRINGS ARPT                           1
+## 216                                  RICHMOND INTL                          53
+## 217                         KISSIMMEE GATEWAY ARPT                          11
+## 218                           VERO BEACH MUNICIPAL                           8
+## 219                           WAYNE MUNICIPAL ARPT                           1
+## 220                     ROCK SPRINGS-SWEETWATER CO                           2
+## 221                    LA CROSSE MUNICIPAL AIRPORT                           5
+## 222                    RICHARD LLOYD JONES JR ARPT                          43
+## 223                             HEWANORRA ST LUCIA                           2
+## 224                         BUTLER COUNTY REGIONAL                           3
+## 225                   SPRINGFIELD-BRANSON NATIONAL                          55
+## 226                   ABRAHAM LINCOLN CAPITAL ARPT                          30
+## 227                           BUCHOLZ AAF MARSHALL                           1
+## 228                      CENTRAL NEBRASKA REGIONAL                           8
+## 229                                     TAMPA INTL                         146
+## 230                             WORCESTER REGIONAL                          12
+## 231                                 MEMORIAL FIELD                           3
+## 232                                   KAHULUI ARPT                          79
+## 233                                  SANTIAGO INTL                           4
+## 234                            OAKLAND COUNTY INTL                          16
+## 235                               JOHN C TUNE ARPT                           1
+## 236                 FORT LAUDERDALE EXECUTIVE ARPT                          32
+## 237                             L F WADE INTL ARPT                           5
+## 238                                 MELBOURNE INTL                          10
+## 239                        BISMARCK MUNICIPAL ARPT                          23
+## 240                             MINOT INTL AIRPORT                           1
+## 241                                SLIDELL AIRPORT                           1
+## 242                                      WALLBLAKE                           1
+## 243                               GREAT FALLS INTL                           7
+## 244                             BRAINERD-CROW WING                           2
+## 245                                BLUE GRASS ARPT                          72
+## 246                              ROGUE VALLEY INTL                          10
+## 247                       STUTTGART MUNICIPAL ARPT                           2
+## 248                 LAWTON-FORT SILL REGIONAL ARPT                           4
+## 249                                   YAMPA VALLEY                          17
+## 250                      COLONEL JAMES JABARA ARPT                           2
+## 251                                   MIDLAND INTL                          40
+## 252                          MALCOLM MCKINNON ARPT                           2
+## 253                                   MILLARD ARPT                           1
+## 254                                    ROCK COUNTY                           4
+## 255                              MARTIN STATE ARPT                           6
+## 256                                   BUCHANAN FLD                           5
+## 257                                    BOIRE FIELD                           2
+## 258                              VALDOSTA REGIONAL                           3
+## 259                         MANASSAS REGIONAL ARPT                          12
+## 260                                      ERIE INTL                          15
+## 261              CINCINNATI MUNI ARPT-LUNKEN FIELD                          22
+## 262                         SACRAMENTO MATHER ARPT                          21
+## 263                LUIS MUNOZ MARIN INTL -SAN JUAN                          62
+## 264                                   MOLOKAI ARPT                          45
+## 265                              MCGHEE TYSON ARPT                          41
+## 266                 ST. PETERSBURG/CLEARWATER INTL                          38
+## 267                              GRANT COUNTY ARPT                          45
+## 268                 TORONTO/LESTER B. PEARSON INTL                          11
+## 269            DANE COUNTY REGIONAL ARPT-TRUAX FLD                          79
+## 270                         EDWARD G PITKA SR ARPT                           1
+## 271                 UNIV OF ILLINOIS -WILLARD ARPT                          37
+## 272                             ELKO REGIONAL ARPT                           5
+## 273                          DEKALB-PEACHTREE ARPT                          31
+## 274                         CHICAGO EXECUTIVE ARPT                          14
+## 275                              FLORENCE REGIONAL                           2
+## 276                          NORWOOD MEMORIAL ARPT                           4
+## 277                       LIVERMORE MUNICIPAL ARPT                           2
+## 278                   ROCKY MOUNT WILSON RGNL ARPT                           1
+## 279                                     TULSA INTL                          64
+## 280                              BATON ROUGE METRO                          62
+## 281               WILLOUGHBY LOST NATION MUNI ARPT                           1
+## 282                     WILKES-BARRE/SCRANTON INTL                          20
+## 283                                HENDERSON FIELD                          48
+## 284                                FALLS INTL ARPT                           2
+## 285                                   LUBBOCK INTL                          39
+## 286                                  AUGUSTA STATE                           4
+## 287                                WILMINGTON INTL                          31
+## 288                               JUNEAU INTL ARPT                          10
+## 289                                RENO TAHOE INTL                          57
+## 290                                   ST AUGUSTINE                          12
+## 291                       MONTGOMERY REGIONAL ARPT                          19
+## 292                        PORTLAND-HILLSBORO ARPT                          14
+## 293                              PANGBORN MEMORIAL                           6
+## 294                                     TRI-CITIES                          10
+## 295                               PURDUE UNIV ARPT                           6
+## 296                             DAYTONA BEACH INTL                          61
+## 297                       EASTERWOOD FIELD AIRPORT                           9
+## 298                              MANAGUA INTL ARPT                          14
+## 299                           HENRY E ROHLSEN ARPT                          19
+## 300                           IMPERIAL COUNTY ARPT                           2
+## 301                             KLAMATH FALLS INTL                          18
+## 302                            FAIRBANKS INTL ARPT                          19
+## 303                   EUGENIO MARIA DE HOSTOS ARPT                           3
+## 304                             MISSOULA INTL ARPT                          10
+## 305                          DUBUQUE REGIONAL ARPT                          12
+## 306                                SAND POINT ARPT                           1
+## 307                          MONETT MUNICIPAL ARPT                           1
+## 308                          WATERBURY-OXFORD ARPT                           9
+## 309                         AKRON-CANTON MUNICIPAL                          25
+## 310                               READING REGIONAL                          13
+## 311                                 COLUMBUS METRO                          18
+## 312                             NANTUCKET MEMORIAL                           7
+## 313               ROCKY MOUNTAIN METROPOLITAN ARPT                           6
+## 314                                 COLUMBIA METRO                          45
+## 315                                   WILLIAMSPORT                           4
+## 316                                       BUSH FLD                          36
+## 317                 INDIANAPOLIS METROPOLITAN ARPT                           2
+## 318                              BISHOP INTL FLINT                          22
+## 319                                BELLINGHAM INTL                           8
+## 320                                      BETZ ARPT                           1
+## 321                              NOGALES INTL ARPT                           1
+## 322                                     TOKYO INTL                           2
+## 323                                    GANDER INTL                           2
+## 324                          GOSHEN MUNICIPAL ARPT                           2
+## 325                     ADAMS COUNTY- LEGION FIELD                           1
+## 326                        HAMILTON MUNICIPAL ARPT                           1
+## 327                              FALCON FIELD ARPT                           3
+## 328                                   KAPALUA ARPT                          84
+## 329                           BROWNSVL/SO PADRE IS                           1
+## 330                                 GUAM INTL ARPT                           5
+## 331                CHESTER COUNTY G O CARLSON ARPT                           1
+## 332                     SNOHOMISH CO (PAINE FIELD)                           9
+## 333                     ST. LUCIE COUNTY INTL ARPT                          15
+## 334                               MEACHAM FT WORTH                           8
+## 335                   GRAND JUNCTION REGIONAL ARPT                           4
+## 336                      IDAHO FALLS REGIONAL ARPT                          11
+## 337                                       MBS INTL                          42
+## 338                               REPUBLIC AIRPORT                          16
+## 339                         CAPITAL CITY ARPT (PA)                           5
+## 340                    GREENVILLE-SPARTANBURG INTL                          18
+## 341                        ASHEVILLE REGIONAL ARPT                          28
+## 342                              ST LOUIS DOWNTOWN                          18
+## 343                           MOBILE DOWNTOWN ARPT                           9
+## 344                        PULLMAN-MOSCOW REGIONAL                           7
+## 345                          GENERAL ESCOBEDO INTL                           6
+## 346                                MCNARY FLD ARPT                          12
+## 347                                   BOWMAN FIELD                          22
+## 348                            PIEDMONT TRIAD INTL                          28
+## 349                         FLOYD BENNETT MEMORIAL                           4
+## 350                              PU DONG INTL ARPT                           3
+## 351                             AMSTERDAM SCHIPHOL                           2
+## 352                       WEST BEND MUNICIPAL ARPT                           2
+## 353                               GREATER ROCKFORD                          49
+## 354                              GRAND CANYON WEST                           2
+## 355                             KEY WEST INTL ARPT                          21
+## 356                            EPHRAIM- FISH CREEK                           1
+## 357                               NUT TREE AIRPORT                           1
+## 358                      SACRAMENTO EXECUTIVE ARPT                          15
+## 359                             MONTEREY PENINSULA                           6
+## 360                            JOE FOSS FIELD ARPT                          23
+## 361                         CHEYENNE REGIONAL ARPT                           3
+## 362                      TRI-STATE MILTON FERGUSON                          17
+## 363                              CYRIL E KING ARPT                          12
+## 364                           LONG BEACH-DAUGH FLD                          86
+## 365                          ABILENE REGIONAL ARPT                           9
+## 366                           TEXARKANA-WEBB FIELD                           3
+## 367                             INDIRA GANDHI INTL                           4
+## 368                                       HAMILTON                           2
+## 369                         WILL ROGERS WORLD ARPT                          82
+## 370                         LEBANON MUNICIPAL ARPT                           7
+## 371                               GRAND FORKS INTL                          39
+## 372                             HILTON HEAD ISLAND                           1
+## 373                                WILLOW RUN ARPT                          19
+## 374                      GROSSE ILE MUNICIPAL ARPT                           2
+## 375                       LAKELAND LINDER REGIONAL                           4
+## 376                              SHEREMETYEVO INTL                           1
+## 377                         CIUDAD DEL ESTE GARCIA                           1
+## 378                            SOUTH BEND REGIONAL                          36
+## 379                      OUTAGAMIE COUNTY REGIONAL                          23
+## 380                               MAHLON SWEET FLD                           9
+## 381                             QUONSET STATE ARPT                           9
+## 382                                     CLARK INTL                           8
+## 383                SOUTHWEST GEORGIA REGIONAL ARPT                           5
+## 384            EASTERN WEST VIRGINIA REGIONAL ARPT                           1
+## 385                           BOEING FIELD K C INT                          21
+## 386                                    SAIPAN INTL                          17
+## 387                     WILLIAMSON COUNTY REGIONAL                           9
+## 388                                CENTENNIAL ARPT                          10
+## 389                           WALLA WALLA REGIONAL                           3
+## 390                           JIM HOGG COUNTY AROT                           2
+## 391                                                                         13
+## 392                       HAWTHORNE MUNICIPAL ARPT                           4
+## 393                        PETALUMA MUNICIPAL ARPT                           1
+## 394                             SONOMA COUNTY ARPT                           3
+## 395                                     LANAI ARPT                          11
+## 396                                    TUCSON INTL                          48
+## 397                  JOHNSON COUNTY EXECUTIVE ARPT                           3
+## 398                        ROSWELL INTL AIR CENTER                           3
+## 399                                 ALBERT J ELLIS                          11
+## 400                                 NEW TOKYO INTL                           4
+## 401                           HECTOR INTERNATIONAL                          15
+## 402                             SCHENECTADY COUNTY                           1
+## 403                              LONDON-LUTON ARPT                           1
+## 404                                PUNTA CANA INTL                          10
+## 405                           DILLANT-HOPKINS ARPT                           4
+## 406                             SALISBURY-WICOMICO                           2
+## 407                       CORPUS CHRISTI INTL ARPT                          27
+## 408                           MONROE REGIONAL ARPT                           5
+## 409                           BARNSTABLE MUNICIPAL                          10
+## 410                                ROBERTSON FIELD                           2
+## 411                            MODESTO CITY-COUNTY                           4
+## 412                               YELLOWSTONE ARPT                           1
+## 413                                 DEER PARK ARPT                           1
+## 414                                  SANGSTER INTL                          19
+## 415                           ZELIENOPLE MUNICIPAL                           1
+## 416                    LORAIN COUNTY REGIONAL ARPT                           9
+## 417                                     CECIL ARPT                           4
+## 418                              BOLTON FIELD ARPT                           1
+## 419                              ST LOUIS REGIONAL                           2
+## 420                       EASTON/NEWMAN FIELD ARPT                           2
+## 421                            CHERRY CAPITAL ARPT                          17
+## 422                         ST. PAUL DOWNTOWN ARPT                          22
+## 423                         OSCEOLA MUNICIPAL ARPT                           1
+## 424                           YELLOWSTONE REGIONAL                           4
+## 425                            DURANGO-LA PLATA CO                           5
+## 426                                  SELAWICK ARPT                           1
+## 427                        WALLOPS FLIGHT FACILITY                           2
+## 428                          OHIO STATE UNIVERSITY                          15
+## 429                 SHEBOYGAN COUNTY MEMORIAL ARPT                           1
+## 430                                    SITKA (SPB)                           2
+## 431                     THIEF RIVER FALLS REGIONAL                           1
+## 432                                   YAKUTAT ARPT                           6
+## 433                             MANCHESTER ENGLAND                           5
+## 434                     MARSHALL ISLANDS INTL ARPT                           1
+## 435                          SYRACUSE HANCOCK INTL                          20
+## 436                                 MERCEDITA ARPT                           5
+## 437                    ORMOND BEACH MUNICIPAL ARPT                           5
+## 438                         MONTROSE REGIONAL ARPT                          10
+## 439                                HELENA REGIONAL                           6
+## 440                                MOBILE REGIONAL                          21
+## 441                              PALM SPRINGS INTL                          10
+## 442                  DE KALB TAYLOR MUNICIPAL ARPT                           1
+## 443              EVANSTON-UINTA COUNTY BURNS FIELD                           1
+## 444                    JESSE VIERTEL MEMORIAL ARPT                           1
+## 445                              MCCLELLAN-PALOMAR                           7
+## 446                               EL SALVADOR INTL                          13
+## 447                            MC CLELLAN AIRFIELD                          13
+## 448                                   WAYNE COUNTY                           1
+## 449                                  CHINO AIRPORT                           7
+## 450                                MILANO MALPENSA                           3
+## 451                        MIDDLE GEORGIA REGIONAL                           3
+## 452                           COMPTON/WOODLEY ARPT                           1
+## 453                    YOUNGSTOWN-WARREN RGNL ARPT                           1
+## 454                            RANGE REGIONAL ARPT                           1
+## 455                                  EL MONTE ARPT                           6
+## 456                 ALLENTOWN QUEEN CITY MUNICIPAL                           3
+## 457                       SUGAR LAND REGIONAL ARPT                           6
+## 458                          NORTHEASTERN REGIONAL                           1
+## 459                                 LINDEN AIRPORT                           1
+## 460                                 MADRID-BARAJAS                           6
+## 461                       ELMIRA/CORNING MUNICIPAL                          12
+## 462                             MANHATTAN REGIONAL                           3
+## 463                      SCOTT CITY MUNICIPAL ARPT                           1
+## 464                     CHILLICOTHE MUNICIPAL ARPT                           1
+## 465                   PLYMOUTH MUNICIPAL ARPT (MA)                           4
+## 466                 BOISE AIR TERMINAL/GOWEN FIELD                          39
+## 467                            ANOKA COUNTY-BLAINE                           5
+## 468                            HAGERSTOWN REGIONAL                          10
+## 469             USAF ACADEMY BULLSEYE AUX AIRSTRIP                           5
+## 470                       GLASGOW INTL/WOKAL FIELD                           2
+## 471                        MONMOUTH EXECUTIVE ARPT                           4
+## 472                        QUEBEC/JEAN LESAGE INTL                           1
+## 473                                 ELK GROVE ARPT                           1
+## 474                          LAKE CHARLES REGIONAL                           1
+## 475                                   WINDHAM ARPT                           1
+## 476                               HUNTINGBURG ARPT                           2
+## 477                           DUTCHESS COUNTY ARPT                           7
+## 478                 FERANDINA BEACH MUNICIPAL ARPT                           1
+## 479                               HOBBY FIELD ARPT                           1
+## 480                           CAPE MAY COUNTY ARPT                           1
+## 481                               SALINA MUNICIPAL                           1
+## 482                                    BETHEL ARPT                           6
+## 483                      GLADEWATER MUNICIPAL ARPT                           1
+## 484                                     CALI/VALLE                           4
+## 485                                    CANCUN INTL                          17
+## 486                    OCONEE COUNTY REGIONAL ARPT                           2
+## 487                            KETCHIKAN INTL ARPT                           4
+## 488                           TWEED-NEW HAVEN ARPT                          13
+## 489                            GALLATIN FIELD ARPT                           7
+## 490                                  PINAL AIRPARK                           1
+## 491                               MARTHAS VINEYARD                           5
+## 492                       BROOKINGS MUNICIPAL ARPT                           4
+## 493                              EAST HAMPTON ARPT                           3
+## 494                            NATRONA COUNTY INTL                           4
+## 495                                   FINDLAY ARPT                           3
+## 496             ROGERS MUNICIPAL ARPT-CARTER FIELD                           2
+## 497                       FULLERTON MUNICIPAL ARPT                           4
+## 498                      ST CLAIR COUNTY INTL ARPT                           3
+## 499                       KINGS LAND O' LAKES ARPT                           1
+## 500                            RAPID CITY REGIONAL                           8
+## 501                          AURORA MUNICIPAL ARPT                           6
+## 502                              RICKENBACKER INTL                           6
+## 503                            SANTIAGO CIBAO INTL                          16
+## 504               NORTH CENTRAL WEST VIRGINIA ARPT                          15
+## 505                                KONGIGANAK ARPT                           1
+## 506                            WESTERLY STATE ARPT                           3
+## 507                       CAPE GIRARDEAU MUNICIPAL                           4
+## 508               KALAELOA ARPT JOHN RODGERS FIELD                           9
+## 509                           JUAN SANTAMARIA INTL                          17
+## 510                            ERNEST A LOVE FIELD                          23
+## 511                             SANTA FE DE BOGOTA                           4
+## 512                 KENDALL-TAMIAMI EXECUTIVE ARPT                           9
+## 513                GRAND RAPIDS/ITASCA COUNTY ARPT                           1
+## 514                           ADDINGTON FIELD ARPT                           1
+## 515                              WILLMAR MUNICIPAL                           4
+## 516                           MC ALLEN MILLER INTL                          21
+## 517                       PALESTINE MUNICIPAL ARPT                           1
+## 518                     WHEELER-SACK ARMY AIRFIELD                           1
+## 519                       CLEVELAND MUNICIPAL ARPT                           2
+## 520                       DEMOPOLIS MUNICIPAL ARPT                           1
+## 521                     NEW CENTURY AIRCENTER ARPT                           3
+## 522                            FORT DODGE REGIONAL                           2
+## 523                         ARNOLD PALMER REGIONAL                           2
+## 524                                   BRANSON ARPT                           6
+## 525                                    LAREDO INTL                           7
+## 526                             FRIDAY HARBOR ARPT                           1
+## 527                                  WENDOVER ARPT                           1
+## 528                           ROBT L BRADSHAW INTL                           2
+## 529                           ALTOONA-BLAIR COUNTY                           1
+## 530                              REDDING MUNICIPAL                           8
+## 531                            BILLINGS LOGAN INTL                           5
+## 532                           PHOENIX-MESA GATEWAY                          21
+## 533                                                                         21
+## 534                                  COLD BAY ARPT                           1
+## 535                          RAFAEL HERNANDEZ ARPT                           2
+## 536                              DELTA COUNTY ARPT                           2
+## 537                                  BOWERMAN ARPT                           3
+## 538                                        KEY FLD                           1
+## 539                           BELLEVILLE MUNICIPAL                           1
+## 540                                  MONROE COUNTY                           6
+## 541                              COLUMBIA REGIONAL                           7
+## 542                         FORT WORTH SPINKS ARPT                           4
+## 543                               PUNTA GORDA ARPT                           6
+## 544                               DULUTH INTL ARPT                           4
+## 545                         WILLIAM B HEILIG FIELD                           6
+## 546                          PHOENIX GOODYEAR ARPT                           7
+## 547                  JAMES CLEMENTS MUNICIPAL ARPT                           1
+## 548                                                                          6
+## 549                                ALEXANDRIA INTL                           3
+## 550                              GARY CHICAGO INTL                           6
+## 551               CAPE COD COAST GUARD AIR STATION                           2
+## 552                       GREENVILLE DOWNTOWN ARPT                           4
+## 553                       RIO VISTA MUNICIPAL ARPT                           1
+## 554                    ELIZABETHTON MUNICIPAL ARPT                           1
+## 555                      PRYOR FIELD REGIONAL ARPT                           1
+## 556                      DANIEL ODUBER QUIROS INTL                           8
+## 557                CHARLES B WHEELER DOWNTOWN ARPT                          22
+## 558                                         KUNSAN                           1
+## 559                       TEHACHAPI MUNICIPAL ARPT                           1
+## 560                          BARKLEY REGIONAL ARPT                           3
+## 561               JACQUELINE COCHRAN REGIONAL ARPT                           2
+## 562                             BARROW COUNTY ARPT                           1
+## 563                         HAYWARD EXECUTIVE ARPT                           3
+## 564                               TUPELO MUNICIPAL                           3
+## 565                     MIDDLETON MUNI MOREY FIELD                           2
+## 566                                 FIUMICINO ARPT                           3
+## 567                             WACO REGIONAL ARPT                           8
+## 568                                     LIEGE ARPT                           2
+## 569                       CHESTERFIELD COUNTY ARPT                           3
+## 570                                    CASTLE ARPT                           2
+## 571                                SKAGIT REGIONAL                           2
+## 572                             SIMON BOLIVAR INTL                           2
+## 573                             MERRILL FIELD ARPT                           2
+## 574                          GRAND CANYON NATIONAL                           2
+## 575                                 LA ROMANA INTL                           2
+## 576         REID-HILLVIEW ARPT OF SANTA CLARA CNTY                           4
+## 577                               BERZ-MACOMB ARPT                           1
+## 578                              FLYING CLOUD ARPT                           4
+## 579              SOUTHWEST MINNESOTA REGIONAL ARPT                           2
+## 580                          BEMIDJI REGIONAL ARPT                           1
+## 581                      SPENCER MUNICIPAL AIRPORT                           1
+## 582               GREATER PORTSMOUTH REGIONAL ARPT                           1
+## 583                           TOMPKINS COUNTY ARPT                           5
+## 584                              GREGG COUNTY ARPT                          18
+## 585                         GREENBRIER VALLEY ARPT                           3
+## 586                                WILEY POST ARPT                           6
+## 587                                 VIRU VIRU INTL                           4
+## 588                                                                         10
+## 589                              ERNESTO CORTISSOZ                           1
+## 590                              LIMA ALLEN COUNTY                           1
+## 591                   MERLE K (MUDHOLE) SMITH ARPT                           2
+## 592                    SOUTHWEST MICHIGAN REGIONAL                           2
+## 593                            TACOMA NARROWS ARPT                           6
+## 594                              MATHIS FIELD (TX)                           4
+## 595                       GREENWOOD MUNICIPAL ARPT                           2
+## 596                                PIARCO TRINIDAD                           1
+## 597                        FAIRMONT MUNICIPAL ARPT                           1
+## 598                                      LA AURORA                           3
+## 599                               NAPLES MUNICIPAL                           7
+## 600                              HOUSTON GULF ARPT                           1
+## 601                               MORAN FIELD ARPT                           1
+## 602                         MASON COUNTY ARPT (MI)                           1
+## 603                              PUERTO PLATA INTL                           5
+## 604                               ASHTABULA COUNTY                           1
+## 605                 COLEMAN A YOUNG MUNICIPAL ARPT                           4
+## 606                       MANSFIELD LAHM MUNICIPAL                           2
+## 607                      LYNDEN PINDLING INTL ARPT                           9
+## 608                                   HERLONG ARPT                           1
+## 609                     CAPT FEAR REGIONAL JETPORT                           1
+## 610                            CARRABELLE-THOMPSON                           1
+## 611                        FRANCIS S GABRESKI ARPT                           4
+## 612                                   HAWKINS ARPT                           1
+## 613                                HEMET-RYAN ARPT                           3
+## 614                            CUBA MUNICIPAL ARPT                           1
+## 615                                PAGE FIELD ARPT                           2
+## 616                           MERRILL C MEIGS ARPT                           4
+## 617                                 LOS CABOS INTL                           3
+## 618                                   DECATUR ARPT                           4
+## 619             TERRE HAUTE INTL ARPT-HULMAN FIELD                           7
+## 620                              TOLUCA/LIC ADOLFO                           1
+## 621                 CHARLOTTESVILLE-ALBEMARLE ARPT                           5
+## 622                         ELKHART MUNICIPAL ARPT                           3
+## 623                           KINSTON REGL JETPORT                           1
+## 624                                      SIGONELLA                           1
+## 625                     MT PLEASANT MUNICIPAL ARPT                           2
+## 626                              LIBERAL MUNICIPAL                           2
+## 627                          NORFOLK REGIONAL ARPT                           2
+## 628                           ESSEX COUNTY AIRPORT                          10
+## 629                         DANVILLE REGIONAL ARPT                           2
+## 630                   COLUMBUS MUNICIPAL ARPT (NE)                           1
+## 631                      GUANAJUATO DEL BAJIO INTL                           3
+## 632                  SAN LUIS COUNTY REGIONAL ARPT                          14
+## 633                         PALMDALE REGIONAL ARPT                           5
+## 634                                 STOCKTON METRO                           6
+## 635                                                                          4
+## 636                                GUNNISON COUNTY                           2
+## 637                           LLANO MUNICIPAL ARPT                           1
+## 638               CHARLOTTE-MONROE  EXECUTIVE ARPT                           1
+## 639                              OWEN ROBERTS INTL                           3
+## 640                               W K KELLOGG ARPT                           7
+## 641                            FORT WORTH ALLIANCE                           5
+## 642                                                                          2
+## 643                                 ALBERT WHITTED                           1
+## 644                                STELLAR AIRPARK                           1
+## 645                  DESTIN-FORT WALTON BEACH ARPT                           2
+## 646                                   CALGARY INTL                           3
+## 647                  DELAWARE COUNTY REGIONAL ARPT                           2
+## 648                            YAKIMA AIR TERMINAL                           9
+## 649  RALEIGH EXEC JETPORT AT SANFORD-LEE CNTY ARPT                           2
+## 650                                   DAVID'S ARPT                           1
+## 651                          BUFFALO AIRFIELD ARPT                           1
+## 652                             HAWKINS FIELD ARPT                           2
+## 653                                    ASHE COUNTY                           1
+## 654                          NORTH PLATTE REGIONAL                           2
+## 655                               GATWICK - LONDON                           5
+## 656                CLARK COUNTY REGIONAL ARPT (IN)                           2
+## 657                                TIANJIN (CHINA)                           1
+## 658                             BENITO JUAREZ INTL                           7
+## 659                          KENT STATE UNIVERSITY                           4
+## 660                          CORTEZ MUNICIPAL ARPT                           2
+## 661                             SANTA MARIA PUBLIC                          14
+## 662                             SANTA FE MUNICIPAL                           5
+## 663                          MANITOWOC COUNTY ARPT                           1
+## 664                          LAKE HAVASU CITY ARPT                           1
+## 665                          BARNES MUNICIPAL ARPT                           2
+## 666                                      FORD ARPT                           1
+## 667                           PROVO MUNICIPAL ARPT                           2
+## 668                          FOUR CORNERS REGIONAL                           2
+## 669                          DELAND MUNICIPAL ARPT                           4
+## 670                           FORBES FIELD AIRPORT                           3
+## 671                        H L SONNY CALLAHAN ARPT                           1
+## 672                         WM FAIRCHILD INTL ARPT                           2
+## 673                                                                          2
+## 674                             MID-DELTA REGIONAL                           1
+## 675                                                                          2
+## 676                                                                          5
+## 677                            ANN ARBOR MUNICIPAL                           2
+## 678                                      TSTC WACO                           2
+## 679                             ST. CLOUD REGIONAL                           3
+## 680                          FAYETTVILLE MUNICIPAL                           2
+## 681                                  BESSEMER ARPT                           2
+## 682                             BRENNER FIELD ARPT                           1
+## 683                     ANNISTON METROPOLITAN ARPT                           2
+## 684                                 COZUMEL MEXICO                           3
+## 685                             BLOCK ISLAND STATE                           1
+## 686                              CLEARVIEW AIRPARK                           1
+## 687                             MUIR ARMY AIRFIELD                           1
+## 688                              LAKE IN THE HILLS                           3
+## 689                 LOUISA COUNTY ARPT/FREEMAN FLD                           1
+## 690                               MEADOW LAKE ARPT                           2
+## 691                        JOHN F KENNEDY MEMORIAL                           4
+## 692                                    TYONEK ARPT                           1
+## 693                         PEARLAND REGIONAL ARPT                           1
+## 694                            HURON REGIONAL ARPT                           3
+## 695                                NORTH LAS VEGAS                           2
+## 696                                                                          4
+## 697                     SOUTHBRIDGE MUNICIPAL ARPT                           1
+## 698                               LARAMIE REGIONAL                           3
+## 699                                HAMILTON ISLAND                           1
+## 700                            JOHNSTON ATOLL ARPT                           1
+## 701             ROSEAU MUNI ARPT/RUDY BILLBERG FLD                           1
+## 702                     GAINESVILLE MUNICIPAL ARPT                           1
+## 703                           LITCHFIELD MUNICIPAL                           2
+## 704                         GRIFFING SANDUSKY ARPT                           1
+## 705                                     PUT IN BAY                           1
+## 706                               WALDRONAIRE ARPT                           1
+## 707                         SANTA MONICA MUNICIPAL                           3
+## 708                          GREATER KANKAKEE ARPT                           2
+## 709                       GREELEY-WELD COUNTY ARPT                           2
+## 710                          ST. GEORGE  ARPT (AK)                           1
+## 711                     WORTHINGTON MUNICIPAL ARPT                           1
+## 712                             BEAVER COUNTY ARPT                           1
+## 713                           OHIO UNIVERSITY ARPT                           3
+## 714                               WINGS FIELD ARPT                           2
+## 715                              RIVERTON REGIONAL                           1
+## 716                           GILLETTE CAMPBELL CO                           4
+## 717                         EDWARDS AIR FORCE BASE                           1
+## 718                                   EMMONAK ARPT                           1
+## 719                                    BANGOR INTL                           3
+## 720                                   CHESTER ARPT                           1
+## 721                             LYNCHBURG REGIONAL                           2
+## 722                           SPACE COAST REGIONAL                           2
+## 723                          SIDNEY MUNICIPAL AR[T                           2
+## 724                                 PAGO PAGO INTL                           9
+## 725                               GNOSS FIELD ARPT                           3
+## 726                                SCOTTSDALE ARPT                           6
+## 727                           GARDEN CITY REGIONAL                           3
+## 728                                   INCHEON INTL                           2
+## 729                                 PAGE MUNICIPAL                           2
+## 730                       MILLVILLE MUNICIPAL ARPT                           1
+## 731                                      ROSTRAVER                           1
+## 732                              MCCORD FIELD ARPT                           1
+## 733                        DYERSBURG REGIONAL ARPT                           1
+## 734                                 ARCATA AIRPORT                           2
+## 735                              T B LETTSOME INTL                           1
+## 736                              ORCAS ISLAND ARPT                           1
+## 737                                   OLYMPIA ARPT                           2
+## 738                           ATHENS/BEN EPPS ARPT                           1
+## 739                                  FREEPORT INTL                           2
+## 740                                    SAWYER INTL                           3
+## 741                            PORT-AU-PRINCE INTL                           4
+## 742                            BIG PINEY-MARBLETON                           1
+## 743                                 DEADHORSE ARPT                           2
+## 744                            OGDEN-HINCKLEY ARPT                           3
+## 745                         MIDDLE BASS-EAST POINT                           1
+## 746                             MEADOWS FIELD ARPT                           5
+## 747                                    NEWTOK ARPT                           1
+## 748                           LT WARREN EATON ARPT                           1
+## 749                DAVID WAYNE HOOKS MEMORIAL ARPT                           4
+## 750                         HOUSTON-SOUTHWEST ARPT                           2
+## 751                          MANKATO REGIONAL ARPT                           1
+## 752                PETERSBURG JAMES A JOHNSON ARPT                           2
+## 753                           MUSKEGON COUNTY ARPT                           6
+## 754                               CREVE COEUR ARPT                           1
+## 755                              FLAGSTAFF PULLIAM                           3
+## 756                        ADIRONDAK REGIONAL ARPT                           1
+## 757                OCEAN CITY MUNICIPAL  ARPT (MD)                           2
+## 758                                                                          1
+## 759                      AUBURN-LEWISTON MUNICIPAL                           2
+## 760                     CARROLL COUNTY-TOLSON ARPT                           1
+## 761                              MIAMI COUNTY ARPT                           1
+## 762                              INCIRLIK AIR BASE                           2
+## 763                                      CAMARILLO                           8
+## 764                                RYAN FIELD ARPT                           1
+## 765                           ORANJESTAD/REINA BEA                           2
+## 766                      BELIZE INTERNATIONAL ARPT                           3
+## 767                               MANDAN MUNICIPAL                           1
+## 768                           CHICO MUNICIPAL ARPT                           1
+## 769                           DUBOIS REGIONAL ARPT                           2
+## 770                        LEESBURG EXECUTIVE ARPT                           3
+## 771                        PORTLAND-TROUTDALE ARPT                           2
+## 772                                                                          3
+## 773                          HOUSTON MEMORIAL ARPT                           1
+## 774                                 BARCELONA ARPT                           2
+## 775                       SHREVEPORT DOWNTOWN ARPT                           1
+## 776                          MELVILLE HALL AIRPORT                           1
+## 777                            LENAWEE COUNTY ARPT                           2
+## 778                           DOUBLE EAGLE II ARPT                           1
+## 779                                    CEDAR MILLS                           1
+## 780                              PRICE COUNTY ARPT                           1
+## 781                             HATTIESBURG-LAUREL                           4
+## 782                              SOUTHERN ILLINOIS                           1
+## 783                            ROLLA NATIONAL ARPT                           1
+## 784                             RUTLAND STATE ARPT                           2
+## 785                      ALBERT LEA MUNICIPAL ARPT                           2
+## 786                                   MOUNT HAWLEY                           1
+## 787                     FRENCH LICK MUNICIPAL ARPT                           1
+## 788             QUINCY REGIONAL ARPT - BALDWIN FLD                           1
+## 789                  SPRINGFIELD BECKLEY MUNICIPAL                           1
+## 790                            PROVIDENCIALES INTL                           3
+## 791                              ANDERSON REGIONAL                           1
+## 792                                OCEAN REEF CLUB                           2
+## 793                            MANSFIELD MUNICIPAL                           1
+## 794                      CHIPPEWA COUNTY INTL ARPT                           2
+## 795                                 CHEFORNAK ARPT                           2
+## 796                              MARCO ISLAND ARPT                           1
+## 797                         SALINAS MUNICIPAL ARPT                           2
+## 798                               SUNDANCE AIRPARK                           1
+## 799                                    HUSLIA ARPT                           1
+## 800                  JASPER COUNTY ARPT-BELL FIELD                           1
+## 801                   LAWRENCE MUNICIPAL ARPT (MA)                           2
+## 802                            GUADALAJARA, MEXICO                           3
+## 803                                           ROTA                           2
+## 804                              JACK MCNAMARA FLD                           1
+## 805            COLLIN COUNTY RGNL ARPT AT MCKINNEY                           5
+## 806                                    COTE D AZUR                           1
+## 807                               NORTHAMPTON ARPT                           1
+## 808                     FAIRMONT MUNI-FRANKMAN FLD                           2
+## 809                                 KONA INTL ARPT                           3
+## 810                                BRANDYWINE ARPT                           1
+## 811                                       SKYHAVEN                           5
+## 812                              HEATHROW - LONDON                           4
+## 813                          WINONA MUNICIPAL ARPT                           1
+## 814             CROOKSTON MUNI ARPT-KIRKWOOD FIELD                           3
+## 815                     SOUTH VALLEY REGIONAL ARPT                           2
+## 816                         KICKAPOO DOWNTOWN ARPT                           1
+## 817                                LAKE HOOD (SPB)                           3
+## 818                            CLINTON COUNTY ARPT                           1
+## 819                         MADISONVILLE MUNICIPAL                           1
+## 820                           MASSEY RANCH AIRPARK                           1
+## 821                         ROBT J MILLER AIR PARK                           1
+## 822                            PETER O KNIGHT ARPT                           2
+## 823                    PALM BEACH COUNTY PARK ARPT                           3
+## 824                               VENANGO REGIONAL                           3
+## 825                              FRIEDMAN MEMORIAL                           3
+## 826             SOUTHWEST WASHINGTON REGIONAL ARPT                           3
+## 827                       RIVERSIDE MUNICIPAL ARPT                           2
+## 828                                      ISLESBORO                           1
+## 829                      IOWA FALLS MUNICIPAL ARPT                           1
+## 830                               FELTS FIELD ARPT                           1
+## 831                          DENTON MUNICIPAL ARPT                           3
+## 832                        MARIANNA MUNICIPAL ARPT                           1
+## 833                                   COLOGNE-BONN                           6
+## 834                          MCCOOK MUNICIPAL ARPT                           4
+## 835                                    KANSAI INTL                           1
+## 836                                 BAIYUN AIRPORT                           4
+## 837                      HANCOCK COUNTY-BAR HARBOR                           1
+## 838                    FERGUS FALLS MUNICIPAL ARPT                           1
+## 839                                ANKENY REGIONAL                           2
+## 840                             BAUDETTE INTL ARPT                           1
+## 841                          DALLAS EXECUTIVE ARPT                           1
+## 842                    MURFREESBORO MUNICIPAL ARPT                           1
+## 843                        SPRINGERVILLE MUNICIPAL                           1
+## 844                         LAUGHLIN BULLHEAD INTL                           2
+## 845               UNIV OF OKLAHOMA WESTHEIMER ARPT                           2
+## 846                                   TREVISO ARPT                           1
+## 847                           OGDENSBURG INTL ARPT                           1
+## 848                        PINE MOUNTAIN LAKE ARPT                           2
+## 849                   VIRACOPOS-CAMPINAS INTL ARPT                           1
+## 850                                                                          1
+## 851                               FRONT RANGE ARPT                           2
+## 852                         HARTFORD-BRAINARD ARPT                           2
+## 853                            FRANKLIN FIELD ARPT                           1
+## 854                               MUNICH INTL ARPT                           1
+## 855                                  BOMBAY/MUMBAI                           3
+## 856                        PETER PRINCE FIELD ARPT                           1
+## 857                     WEST BRANCH COMMUNITY ARPT                           2
+## 858                                        KINGMAN                           2
+## 859                                 HONG KONG INTL                           3
+## 860                                  FERIHEGY ARPT                           2
+## 861                              MALMO-STURUP ARPT                           2
+## 862                      PONCA CITY MUNICIPAL ARPT                           3
+## 863                 KNOXVILLE DOWNTOWN ISLAND ARPT                           1
+## 864                               ONA AIRPARK ARPT                           1
+## 865                                                                          1
+## 866                              DANIEL FIELD ARPT                           1
+## 867                           DOVER AIR FORCE BASE                           1
+## 868                             JOHN H BATTEN ARPT                           1
+## 869                             BERMUDA DUNES ARPT                           2
+## 870                           MASON CITY MUNICIPAL                           5
+## 871                                 TONCONTIN INTL                           2
+## 872                               VALENCIA AIRPORT                           1
+## 873                           KENAI MUNICIPAL ARPT                           2
+## 874                  GENERAL IGNACIO P GARCIA INTL                           1
+## 875                                 SUBIC BAY INTL                           1
+## 876                                       SUNRIVER                           1
+## 877                                ST. LUCIA-VIGIE                           1
+## 878                        CHANDLER MUNICIPAL ARPT                           2
+## 879                          JEFFERSON COUNTY INTL                           1
+## 880                            MADISON COUNTY ARPT                           1
+## 881                              NEWARK-HEATH ARPT                           2
+## 882                       DODGE CITY REGIONAL ARPT                           1
+## 883           PALO ALTO ARPT OF SANTA CLARA COUNTY                           3
+## 884                              GRATIOT COMMUNITY                           1
+## 885                                  LEIPZIG-HALLE                           2
+## 886                        NORTHERN MAINE REGIONAL                           1
+## 887                            GREENWOOD LAKE ARPT                           2
+## 888                                  HAYS REGIONAL                           7
+## 889                                    CUSTER ARPT                           1
+## 890                                    VIENNA INTL                           2
+## 891             M GRAHAM CLARK - TANEY COUNTY ARPT                           1
+## 892                                    RAMONA ARPT                           1
+## 893                       KILLEEN/FT HOOD REGIONAL                           1
+## 894                            RICHARD I BONG ARPT                           1
+## 895                                  TRIPLE W ARPT                           1
+## 896                             WINSTON FIELD ARPT                           1
+## 897                      EDWARD F KNAPP STATE ARPT                           1
+## 898                             LEESBURG INTL ARPT                           2
+## 899                                ANIMAS AIR PARK                           1
+## 900                       LAKE CITY MUNICIPAL ARPT                           1
+## 901                                   CRYSTAL ARPT                           2
+## 902                                 FRANKFURT MAIN                           3
+## 903                       ST GEORGE MUNICIPAL ARPT                           2
+## 904                               SOLDOTNA AIRPORT                           1
+## 905                               GILLESPIE COUNTY                           1
+## 906                                 MARCH ARB ARPT                           1
+## 907                         HENRI COANDA INTL ARPT                           1
+## 908                                  BROOKS COUNTY                           1
+## 909                            FARMINGTON REGIONAL                           1
+## 910                 MIDDLE PENINSULA REGIONAL ARPT                           1
+## 911                CLAYTON COUNTY ARPT- TARA FIELD                           2
+## 912                             PATUXENT RIVER NAS                           1
+## 913                                                                          4
+## 914                                    PENANG INTL                           1
+## 915                            GENESEE COUNTY ARPT                           1
+## 916                           GRANTLEY ADAMS BARBA                           2
+## 917                              WASHINGTON COUNTY                           1
+## 918                               STANSTEAD-LONDON                           1
+## 919                         ANDREWS AIR FORCE BASE                           1
+## 920                            FLAGLER COUNTY ARPT                           2
+## 921                                 GUARULHOS INTL                           3
+## 922                                    BERT MOONEY                           1
+## 923                                                                          1
+## 924              DICKINSON-THEODORE ROOSEVELT RGNL                           3
+## 925                        JOSE MARIA CORDOVE ARPT                           1
+## 926                           FESTUS MEMORIAL ARPT                           1
+## 927                              STUTTGART GERMANY                           1
+## 928                         PERRY COUNTY MUNICIPAL                           1
+## 929                   EASTERN OREGON REGIONAL ARPT                           1
+## 930               DAKAY-YOFF-LEOPOLD SEDAR SENGHOR                           1
+## 931                        GLENDALE MUNICIPAL ARPT                           4
+## 932                                    FOWLER ARPT                           7
+## 933                           HEBER CITY MUNICIPAL                           1
+## 934                             PEARSON FIELD ARPT                           1
+## 935                                                                          1
+## 936                 NORTH PALM BEACH CNTY GEN AVTN                           1
+## 937                                RIYAHD AIR BASE                           1
+## 938                      LAWRENCE J TIMMERMAN ARPT                           1
+## 939                         BOLINGBROOKS CLOW INTL                           1
+## 940                              UGNU-KUPARUK ARPT                           1
+## 941                                                                          2
+## 942                     WASHINGTON COUNTY MEMORIAL                           1
+## 943                                      NOME ARPT                           1
+## 944                  SOUTHEAST TEXAS REGIONAL ARPT                           2
+## 945                                                                          4
+## 946               MILLINGTON REGIONAL JETPORT ARPT                           1
+## 947                          DONALDSON CENTER ARPT                           1
+## 948                         CORDOVA MUNICIPAL ARPT                           1
+## 949              LIVINGSTON COUNTY SPENCER J HARDY                           1
+## 950                           SCOTT AFB/MIDAMERICA                           3
+## 951                            KIRKSVILLE REGIONAL                           2
+## 952                          FORT COLLINS-LOVELAND                           4
+## 953                         SAN PEDRO SULA LA MESA                           3
+## 954                                     HOMER ARPT                           1
+## 955                                       VALKARIA                           1
+## 956                                      HANA ARPT                           1
+## 957                          SEBRING REGIONAL ARPT                           1
+## 958                                   BAHRAIN INTL                           1
+## 959                     HENDERSON CITY-COUNTY ARPT                           2
+## 960                         CHADRON MUNICIPAL ARPT                           1
+## 961                      NEW BEDFORD REGIONAL ARPT                           6
+## 962                                    KIPNUK ARPT                           1
+## 963                                    RAS TANAJIB                           1
+## 964                       FREDERICK MUNICIPAL ARPT                           2
+## 965                                  GRIFFISS INTL                           2
+## 966                   MANISTEE COUNTY-BLACKER ARPT                           2
+## 967                             MAGNOLIA MUNICIPAL                           1
+## 968                 ROCK HILL (YORK CO) BRYANT FLD                           1
+## 969                        MC GUIRE AIR FORCE BASE                           2
+## 970                                                                          8
+## 971                               MURTALA MUHAMMED                           2
+## 972                             NIAGARA FALLS INTL                           2
+## 973                                LA CHINITA INTL                           3
+## 974                       MCCONNELL AIR FORCE BASE                           3
+## 975                              SAN SALVADOR INTL                           1
+## 976                              KIT CARSON COUNTY                           2
+## 977                          TRAVIS AIR FORCE BASE                           1
+## 978                                      DOHA INTL                           1
+## 979                                      WATERTOWN                           1
+## 980                NEW SMYRNA BEACH MUNICIPAL ARPT                           2
+## 981                      BRITTON MUNICIPAL ARPT SD                           1
+## 982                               LOGAN-CACHE ARPT                           1
+## 983                  ARLINGTON MUNICIPAL ARPT (TX)                           1
+## 984                         VISALIA MUNICIPAL ARPT                           3
+## 985                  PHILIP BILLARD MUNICIPAL ARPT                           1
+## 986                   MARSHFIELD MUNI/G HARLOW FLD                           1
+## 987                     RUSSELLVILLE REGIONAL ARPT                           1
+## 988                     COLES COUNTY MEMORIAL ARPT                           1
+## 989                                   HARVEY FIELD                           1
+## 990                           ZAMPERINI FIELD ARPT                           1
+## 991                         POPLAR BLUFF MUNICIPAL                           1
+## 992                                                                          3
+## 993    WAYNESVILLE-ST ROBERT REGIONAL FORNEY FIELD                           2
+## 994                                HERNANDO COUNTY                           1
+## 995                             NEWPORT STATE ARPT                           1
+## 996                                VANDENBERG ARPT                           1
+## 997                      ENTERPRISE MUNICIPAL ARPT                           1
+## 998                    PROVINCETOWN MUNICIPAL ARPT                           2
+## 999         HIGGINSVILLE INDUSTRIAL MUNICIPAL ARPT                           1
+## 1000                     NORTH TEXAS REGIONAL ARPT                           1
+## 1001                        NEVADA COUNTY AIR PARK                           1
+## 1002                    HOMESTEAD AIR RESERVE BASE                           2
+## 1003                  SOUTHEAST IOWA REGIONAL ARPT                           2
+## 1004                      CLAREMONT MUNICIPAL ARPT                           1
+## 1005                        ONTARIO MUNICIPAL ARPT                           1
+## 1006                    ELEFTHERIOS VENIZELOS INTL                           2
+## 1007                      OPA-LOCKA EXECUTIVE ARPT                           3
+## 1008                          CRAIG MUNICIPAL ARPT                           2
+## 1009                    WILEY POST-WILL ROGERS MEM                           2
+## 1010                   LEE'S SUMMIT MUNICIPAL ARPT                           2
+## 1011                         WARSAW MUNICIPAL (IN)                           2
+## 1012                             ALPENA COUNTY REG                           1
+## 1013                         POMPANO BEACH AIRPARK                           1
+## 1014                  ODESSA-SCHLEMEYER FIELD ARPT                           2
+## 1015                       ALLIANCE MUNICIPAL ARPT                           2
+## 1016                                                                         1
+## 1017                  GRANITE FALLS MUNICIPAL ARPT                           1
+## 1018          WASHINGTON EXECUTIVE ARPT HYDE FIELD                           1
+## 1019                      LEA COUNTY REGIONAL ARPT                           1
+## 1020                 OTTAWA/MACDONALD-CARTIER INTL                           1
+## 1021                          GREAT BENT MUNICIPAL                           4
+## 1022                         DELPHI MUNICIPAL ARPT                           1
+## 1023                             CANYONLANDS FIELD                           2
+## 1024                          BRAZORIA COUNTY ARPT                           1
+## 1025                              VANCE BRAND ARPT                           1
+## 1026                               MARCO POLO INTL                           1
+## 1027                      STILLWATER REGIONAL ARPT                           3
+## 1028                        BOLIVAR MUNICIPAL ARPT                           2
+## 1029                             JOHNSTOWN-CAMBRIA                           3
+## 1030                        SHOW LOW REGIONAL ARPT                           1
+## 1031                           BALDWIN COUNTY ARPT                           1
+## 1032                                KALAUPAPA ARPT                           1
+## 1033                              MERCED MUNICIPAL                           2
+## 1034                                                                         5
+## 1035                       NEWTON CITY/COUNTY ARPT                           1
+## 1036                             PELLSTON REGIONAL                           1
+## 1037                     SPRINGDALE MUNICIPAL ARPT                           1
+## 1038                        BRUNSWICK GOLDEN ISLES                           1
+## 1039                              SHALZ FIELD ARPT                           1
+## 1040                               DILLINGHAM ARPT                           1
+## 1041                           MESQUITE METRO ARPT                           1
+## 1042                        FRANK WILEY FIELD ARPT                           1
+## 1043                          GILLESPIE FIELD ARPT                           1
+## 1044                              DELAWARE AIRPARK                           1
+## 1045              VICKSBURG TALLULAH REGIONAL ARPT                           1
+## 1046                             WARREN FIELD ARPT                           1
+## 1047                            IXTAPA-ZIHUATENEJO                           1
+## 1048                          WAUKESHA COUNTY ARPT                           1
+## 1049                  MOUNT AIRY/SURRY COUNTY ARPT                           1
+## 1050                     GENERAL WM J FOX AIRFIELD                           1
+## 1051                             ROWAN COUNTY ARPT                           1
+## 1052                                                                         1
+## 1053                      CINCINNATI-BLUE ASH ARPT                           1
+## 1054                      WATERTOWN MUNICIPAL ARPT                           1
+## 1055                           CEDAR CITY REGIONAL                           1
+## 1056                        POTSDAM MUNICIPAL ARPT                           1
+## 1057                       AUBURN-OPELIKA RG PITTS                           1
+## 1058                           SCAMMON BAY AIRPORT                           1
+## 1059                     GEORGETOWN MUNICIPAL ARPT                           1
+## 1060                             GALEAO INTL (RIO)                           2
+## 1061            SASKATOON/JOHN G. DIEFENBAKER INTL                           1
+## 1062                     SHELL LAKE MUNICIPAL ARPT                           1
+## 1063                     DEVILS LAKE REGIONAL ARPT                           1
+## 1064               GWINNER-ROGER MELROE FIELD ARPT                           1
+## 1065                SIDNEY-RICHLAND MUNICIPAL ARPT                           1
+## 1066                NORTHWEST FLORIDA BEACHES INTL                           3
+## 1067           BOLINDER FIELD - TOOELE VALLEY ARPT                           1
+## 1068                              PRINCEVILLE ARPT                           1
+## 1069                 CHEVRON USA INC SEAPLANE BASE                           1
+## 1070                 LAWRENCE MUNICIPAL  ARPT (KS)                           1
+## 1071                               TULIP CITY ARPT                           1
+## 1072                          KNOX COUNTY REGIONAL                           1
+## 1073                           GEORGE M BRYAN ARPT                           1
+## 1074                          HARRISON COUNTY ARPT                           1
+## 1075                        HAVRE CITY-COUNTY ARPT                           1
+## 1076                             YAZOO COUNTY ARPT                           1
+## 1077                         EAGLE COUNTY REGIONAL                           3
+## 1078                                                                         1
+## 1079                             STENNIS INTL ARPT                           1
+## 1080                     PAUL C MILLER-SPARTA ARPT                           1
+## 1081                            MC KELLER FLD ARPT                           1
+## 1082                          PITT-GREENVILLE ARPT                           2
+## 1083                     DARE COUNTY REGIONAL ARPT                           2
+## 1084                                      SHENZHEN                           1
+## 1085                          TRACY MUNICIPAL ARPT                           1
+## 1086           HARDY-ANDERS FLD NATCHEZ-ADAMS CNTY                           1
+## 1087                                                                         2
+## 1088                             GLACIER PARK INTL                           1
+## 1089                              DUBLIN INTL ARPT                           1
+## 1090                        WAUPACA MUNICIPAL ARPT                           1
+## 1091                            NORMAN MANLEY INTL                           2
+## 1092                  COLUMBIA GORGE REGIONAL ARPT                           1
+## 1093                                                                         2
+## 1094                                 VICTORIA INTL                           1
+## 1095                CORPUS CHRISTI NAS/TRUAX FIELD                           2
+## 1096                       IMMOKALEE REGIONAL ARPT                           1
+## 1097              CHAUTAUQUA COUNTY/JAMESTOWN ARPT                           1
+## 1098                                 ANIAK AIRPORT                           1
+## 1099                                  SHANNON INTL                           1
+## 1100                           WATERTOWN INTL ARPT                           1
+## 1101                    GENERAL RAFAEL BUELNA INTL                           1
+## 1102                  DAVIS MONTHAN AIR FORCE BASE                           1
+## 1103                          SHERIDAN COUNTY ARPT                           1
+## 1104                                                                         1
+## 1105                       BASEL-MULHOUSE-FREIBURG                           1
+## 1106                      PALMYRA (COOPER) AIRPORT                           1
+## 1107                              KENTMORR AIRPARK                           1
+## 1108                           EAGLE CREEK AIRPARK                           1
+## 1109                                   MALAGA ARPT                           1
+## 1110        GENERAL ROBERTO FIERRO VILLALOBOS INTL                           2
+## 1111                                 RICHLAND ARPT                           1
+## 1112                                        ZURICH                           1
+## 1113               GUSTAVO ROJAS PINILLA INTL ARPT                           1
+## 1114                                BOB SIKES ARPT                           1
+## 1115                            V C BIRD INTL ARPT                           1
+## 1116                   BOULDER CITY MUNICIPAL ARPT                           1
+## 1117                          UKIAH MUNICIPAL ARPT                           1
+## 1118                     WEST PLAINS REGIONAL ARPT                           1
+## 1119                              TUNICA MUNI ARPT                           1
+## 1120                       RAMSTEIN AIR FORCE BASE                           1
+## 1121                     THE FLORIDA KEYS MARATHON                           1
+## 1122                    NORTH BIG HORN COUNTY ARPT                           1
+## 1123                          MACKINAC COUNTY ARPT                           1
+## 1124                          HUTCHINSON MUNICIPAL                           1
+## 1125                       DELAWARE MUNICIPAL ARPT                           1
+## 1126                          GALILEO GALILEI ARPT                           1
+## 1127                                                                         1
+## 1128                            MEFFORD FIELD ARPT                           1
+## 1129                      CRAWFORDSVILLE MUNI ARPT                           1
+## 1130                         HICKORY REGIONAL ARPT                           1
+## 1131                              QUINN FIELD ARPT                           1
+## 1132                                                                         2
+## 1133                       MONTREAL INTL (MIRABEL)                           1
+## 1134                              PORT GRAHAM ARPT                           1
+## 1135                                                                         1
+## 1136                          MARANA REGIONAL ARPT                           1
+## 1137                            MERRIT ISLAND ARPT                           1
+## 1138                           GRAYSON COUNTY ARPT                           1
+## 1139                   LAKE PALOURDE BASE HELIPORT                           1
+## 1140                        CULPEPER REGIONAL ARPT                           1
+## 1141                              PRINCESS JULIANA                           1
+\end{verbatim}
+
+\#Create a SQL query against your database to find the airports that had
+the most bird strike incidents (during any flight phase). Include all
+airlines.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT airport.Name, MAX(Count) AS NumberOfBirdStrikeIncidents FROM (SELECT AirportID, COUNT(RecordID) AS Count FROM bird\_strike\_incident}
+\StringTok{    GROUP BY AirportID HAVING WildLife\_NumberOfStruckActual\textgreater{}0}
+\StringTok{    ORDER BY COUNT(RecordID) DESC) AS A INNER JOIN airport ON A.AirportID = airport.AirportID"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                          Name NumberOfBirdStrikeIncidents
+## 1 DALLAS/FORT WORTH INTL ARPT                         803
+\end{verbatim}
+
+\#Create a SQL query against your database to find the number of bird
+strike incidents by year. Include all airlines.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year}\OtherTok{\textless{}{-}}\FunctionTok{substr}\NormalTok{(bird\_strike\_incident}\SpecialCharTok{$}\NormalTok{FlightDate, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{abd}\OtherTok{\textless{}{-}}\FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT * FROM bird\_strike\_incident"}\NormalTok{)}
+\NormalTok{abd}\SpecialCharTok{$}\NormalTok{FlightDate }\OtherTok{\textless{}{-}}\NormalTok{ year}
+\NormalTok{ans}\OtherTok{\textless{}{-}}\FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT FlightDate, COUNT(RecordID) AS NumberOfBirdStrikes FROM abd GROUP BY FlightDate"}\NormalTok{)}
+\NormalTok{ans}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    FlightDate NumberOfBirdStrikes
+## 1        <NA>                 129
+## 2        2000                1367
+## 3        2001                1230
+## 4        2002                1681
+## 5        2003                1568
+## 6        2004                1692
+## 7        2005                1853
+## 8        2006                2159
+## 9        2007                2301
+## 10       2008                2258
+## 11       2009                3247
+## 12       2010                3121
+## 13       2011                2952
+\end{verbatim}
+
+\#Using the above data, build a line graph that visualizes the number of
+bird strikes incidents per year from 2000 to 2011. Adorn the graph with
+appropriate axis labels.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(ans, }\AttributeTok{type =} \StringTok{"o"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\#Creating a stored procedure in MySQL that adds a new bird strike
+incident to the database. Including the following data: airport name,
+aircraft type, flight date, airline, flight phase. The remaining columns
+can be set with default values as defined by the table definitions. Show
+that the insertion worked as expected by retrieving and displaying the
+inserted data. Add any additional arguments to the stored procedure as
+needed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, }\StringTok{"DROP PROCEDURE InsertData"}\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:96404728,0,52>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{query1 }\OtherTok{=} \StringTok{"CREATE PROCEDURE InsertData (IN AirportName nvarchar(30), IN AircraftType nvarchar(45), IN FlightDate datetime, IN Airline nvarchar(45), IN Flightphase nvarchar(45))}
+\StringTok{BEGIN}
+\StringTok{INSERT INTO practicum1.airport (\textasciigrave{}Name\textasciigrave{}) VALUES(AirportName);}
+\StringTok{INSERT INTO practicum1.aircraft (\textasciigrave{}Type\textasciigrave{}) VALUES(AircraftType);}
+\StringTok{INSERT INTO practicum1.airline\_operator (\textasciigrave{}AirlineOperator\textasciigrave{}) VALUES(AirlineOperator);}
+\StringTok{INSERT INTO practicum1.bird\_strike\_incident (\textasciigrave{}FlightDate\textasciigrave{}, \textasciigrave{}PhaseOfFlight\textasciigrave{}) VALUES(FlightDate, Flightphase);}
+\StringTok{UPDATE bird\_strike\_incident SET \textasciigrave{}AirportID\textasciigrave{} = (SELECT AirportID FROM airport WHERE Name = AirportName) WHERE \textasciigrave{}FlightDate\textasciigrave{} = FlightDate AND \textasciigrave{}PhaseOfFlight\textasciigrave{} = FlightPhase;}
+\StringTok{INSERT INTO practicum1.airline\_aircrafts (\textasciigrave{}AircraftTypeID\textasciigrave{}, \textasciigrave{}AirlineOperatorID\textasciigrave{}) SELECT \textasciigrave{}AircraftTypeID\textasciigrave{}, \textasciigrave{}AirlineOperatorID\textasciigrave{} FROM aircraft INNER JOIN airline\_operator WHERE aircraft.Make\_Model = \textquotesingle{} \textquotesingle{} AND aircraft.Type = AircraftType AND airline\_operator.AirlineOperator = Airline;}
+\StringTok{UPDATE bird\_strike\_incident SET \textasciigrave{}PlaneID\textasciigrave{} = (SELECT PlaneID FROM airline\_aircrafts INNER JOIN aircraft INNER JOIN airline\_operator WHERE aircraft.Type = AircraftType AND airline\_operator.AirlineOperator = Airline);}
+\StringTok{END"}
+
+\FunctionTok{dbSendQuery}\NormalTok{(mydb, query1);}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:-58024480,0,53>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbSendQuery}\NormalTok{(mydb,}\StringTok{"call practicum1.InsertData(\textquotesingle{}Delhi\textquotesingle{}, \textquotesingle{}Airplane1\textquotesingle{}, \textquotesingle{}2001/10/15\textquotesingle{}, \textquotesingle{}Air India\textquotesingle{}, \textquotesingle{}Climb\textquotesingle{});"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <MySQLResult:0,0,54>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \OperatorTok{*} \KeywordTok{FROM}\NormalTok{ aircraft }\KeywordTok{WHERE}\NormalTok{ \textasciigrave{}Type\textasciigrave{} }\OperatorTok{=} \StringTok{\textquotesingle{}Airplane1\textquotesingle{}}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rllr@{}}
+\caption{1 records}\tabularnewline
+\toprule
+AircraftTypeID & Type & Make\_Model & IsAircraftLarge\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+AircraftTypeID & Type & Make\_Model & IsAircraftLarge\tabularnewline
+\midrule
+\endhead
+512 & Airplane1 & & 0\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \OperatorTok{*} \KeywordTok{FROM}\NormalTok{ airport }\KeywordTok{WHERE}\NormalTok{ \textasciigrave{}Name\textasciigrave{} }\OperatorTok{=} \StringTok{\textquotesingle{}Delhi\textquotesingle{}}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rll@{}}
+\caption{1 records}\tabularnewline
+\toprule
+AirportID & Name & State\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+AirportID & Name & State\tabularnewline
+\midrule
+\endhead
+2048 & Delhi &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbDisconnect}\NormalTok{(mydb)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\end{document}

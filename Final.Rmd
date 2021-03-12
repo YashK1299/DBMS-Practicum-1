@@ -1,0 +1,406 @@
+---
+title: "Bird_Strike_Incidents_Database"
+author: Yash Manish Kothari, Sanyam Harne
+output:
+  pdf_document: default
+header-includes:
+- \usepackage{xcolor}
+---
+# ERD - link: https://lucid.app/lucidchart/invitations/accept/89b73b05-fc5a-4295-a3e0-2113e8319cda
+# Author1: Yash Manish Kothari, kothari.y@northeastern.edu
+# Author2: Sanyam Harne, harne.sa@northeastern.edu
+
+#Including required packages
+```{r}
+getwd()
+# 1. Library (must be installed prior to loading
+library(RMySQL)     ### MySQL
+library(tidyr)      ### tidyr Seperating rows for handling multivalued attributes
+library(sqldf)      ### SQLdf for using SQL commands on dataframes
+options(sqldf.driver = "SQLite")
+library(dplyr)      ### dplyr for splitting dataframes
+```
+
+#Reading CSV file
+```{r}
+
+#2. CSV File Name:
+#setwd("Documents/DBMS-Workspace/Practicum1")
+file_csv <- 'BirdStrikesData.csv'
+
+df1 <- read.csv(file_csv)
+df2 <- separate_rows(df1, Conditions..Precipitation)
+
+```
+
+#Setting up the database connection
+```{r}
+
+# 4. Settings
+db_user <- 'root'
+db_password <- 'Password@123'
+db_name <- 'practicum1'
+
+# Local: localhost
+db_host <- 'localhost' 
+db_port <- 3306 # always this port unless you change it during installation
+
+# 4. Connect to DB
+mydb <-  dbConnect(MySQL(), user = db_user, password = db_password,
+                dbname = db_name, host = db_host, port = db_port)
+
+#To send Local Variables we write the below statement
+dbSendQuery(mydb, "SET GLOBAL local_infile = true;")
+
+#dbListTables(mydb)
+```
+
+
+#Defining Schema of the database
+#Dropping Tables
+```{r}
+query<- ("DROP TABLE IF EXISTS practicum1.`bird_strike_incident`;");
+dbSendQuery(mydb, query);
+query<- ("DROP TABLE IF EXISTS practicum1.`airport`;");
+dbSendQuery(mydb, query);
+query<- ("DROP TABLE IF EXISTS practicum1.`precipitation`;");
+dbSendQuery(mydb, query);
+query<- ("DROP TABLE IF EXISTS practicum1.`precipitation_type`;");
+dbSendQuery(mydb, query);
+query<- ("DROP TABLE IF EXISTS practicum1.`wildlife`;");
+dbSendQuery(mydb, query);
+query<- ("DROP TABLE IF EXISTS practicum1.`airline_aircrafts`;");
+dbSendQuery(mydb, query);
+query<-("DROP TABLE IF EXISTS practicum1.`airline_operator`;");
+dbSendQuery(mydb, query);
+query<-("DROP TABLE IF EXISTS practicum1.`aircraft`;");
+dbSendQuery(mydb, query);
+dbListTables(mydb);
+```
+#Table Defination aircraft
+```{r}
+query<-("
+  CREATE TABLE IF NOT EXISTS practicum1.`aircraft` (
+  `AircraftTypeID` INT NOT NULL AUTO_INCREMENT,
+  `Type` VARCHAR(45) DEFAULT ' ',
+  `Make_Model` VARCHAR(45) DEFAULT ' ',
+  `IsAircraftLarge` TINYINT DEFAULT 0,
+  CONSTRAINT unique_constraint UNIQUE(Type,Make_Model,IsAircraftLarge),
+  PRIMARY KEY (`AircraftTypeID`));
+");
+
+dbSendQuery(mydb, query);
+```
+
+#Table Defination airline_operator
+```{r}
+query<-("
+  CREATE TABLE IF NOT EXISTS practicum1.`airline_operator` (
+  `AirlineOperatorId` INT NOT NULL AUTO_INCREMENT,
+  `AirlineOperator` VARCHAR(45) DEFAULT ' ' NULL UNIQUE,
+  PRIMARY KEY (`AirlineOperatorId`));");
+
+dbSendQuery(mydb, query);
+```
+
+#Table Defination airline_aircrafts
+```{r}
+query <- ("
+  CREATE TABLE IF NOT EXISTS practicum1.`airline_aircrafts` (
+  `PlaneID` INT NOT NULL AUTO_INCREMENT,
+  `AircraftTypeID` INT NULL,
+  `AirlineOperatorID` INT NULL,
+  `NumberOfEngines` INT  DEFAULT 0 NULL,
+  CONSTRAINT unique_constraint UNIQUE (AircraftTypeID,AirlineOperatorID,NumberOfEngines),
+  PRIMARY KEY (`PlaneID`),
+  FOREIGN KEY (`AircraftTypeID`) REFERENCES practicum1.`aircraft` (`AircraftTypeID`),
+  FOREIGN KEY (`AirlineOperatorID`) REFERENCES practicum1.`airline_operator` (`AirlineOperatorId`));
+  
+  ");
+
+
+dbSendQuery(mydb, query)
+```
+
+#Table Defination wildlife
+```{r}
+query <- ("
+  CREATE TABLE IF NOT EXISTS practicum1.`wildlife` (
+  `WildlifeID` INT NOT NULL AUTO_INCREMENT,
+  `Species` VARCHAR(45) DEFAULT ' ' NULL,
+  `Size` ENUM('Small', 'Medium', 'Large') DEFAULT 'Small' NULL,
+  CONSTRAINT unique_constraint UNIQUE (Species, Size),
+  PRIMARY KEY (`WildlifeID`));");
+
+dbSendQuery(mydb, query)
+```
+
+#Table Defination precipitation_type
+```{r}
+query <- ("
+  CREATE TABLE IF NOT EXISTS practicum1.`precipitation_type` (
+  `PrecipitationID` INT NOT NULL AUTO_INCREMENT,
+  `Precipitation_Type` VARCHAR(45) DEFAULT ' ' NULL UNIQUE,
+  PRIMARY KEY (`PrecipitationID`));");
+
+dbSendQuery(mydb, query)
+```
+
+#Table Defination precipitation
+```{r}
+query <- ("
+  CREATE TABLE IF NOT EXISTS practicum1.`precipitation` (
+  `RecordID` INT NOT NULL,
+  `PrecipitationID` INT NOT NULL,
+  PRIMARY KEY (`RecordID`, `PrecipitationID`),
+  FOREIGN KEY (`PrecipitationID`) REFERENCES practicum1.`precipitation_type` (`PrecipitationID`));");
+
+dbSendQuery(mydb, query)
+```
+
+#Table Defination airport
+```{r}
+query <- ("
+  CREATE TABLE IF NOT EXISTS practicum1.`airport` (
+  `AirportID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) DEFAULT ' ' NULL,
+  `State` VARCHAR(45) DEFAULT ' ' NULL,
+  CONSTRAINT unique_constraint UNIQUE (Name,State),
+  PRIMARY KEY (`AirportID`));");
+
+dbSendQuery(mydb, query)
+```
+
+#Table Defination bird_strike_incident
+```{r}
+query <- ('CREATE TABLE IF NOT EXISTS practicum1.`bird_strike_incident` (
+  `RecordID` INT NOT NULL AUTO_INCREMENT,
+  `FlightDate` DATETIME NULL,
+  `WildLife_NumberOfStruck` VARCHAR(80) NULL,
+  `WildLife_NumberOfStruckActual` INT NULL,
+  `Effect_ImpactToFlight` VARCHAR(80) NULL,
+  `Altitude_Bin` VARCHAR(10) NULL,
+  `EffectIndicatedDamage` VARCHAR(20) NULL,
+  `PhaseOfFlight` ENUM("Approach", "Climb", "Descent", "Landing Roll", "Take-off run", "Taxi") NULL,
+  `WildLifeRemainsCollected` VARCHAR(50) NULL,
+  `WildLifeRemainsSent` VARCHAR(50) NULL,
+  `Remarks` LONGTEXT NULL,
+  `PilotWarned` VARCHAR(50) NULL,
+  `Cost_Total` INT NULL,
+  `FeetAboveGround` INT NULL,
+  `PeopleInjured` INT NULL,
+  `ConditionsSky` VARCHAR(50) NULL,
+  `PlaneID` INT NULL,
+  `WildlifeID` INT NULL,
+  `AirportID` INT NULL,
+  PRIMARY KEY (`RecordID`),
+  FOREIGN KEY (`PlaneID`) REFERENCES practicum1.`airline_aircrafts` (`PlaneID`),
+  FOREIGN KEY (`WildlifeID`) REFERENCES practicum1.`wildlife` (`WildlifeID`),
+  FOREIGN KEY (`AirportID`) REFERENCES practicum1.`airport` (`AirportID`));');
+
+dbSendQuery(mydb, query);
+```
+
+#Loading data into aircraft table
+```{r}
+aircraft <- sqldf('SELECT DISTINCT "Aircraft..Make.Model" AS Make_Model, "Aircraft..Type" AS Type, "Is.Aircraft.Large." AS IsAircraftLarge  FROM df1')
+aircraft[aircraft$IsAircraftLarge == "Yes",]$IsAircraftLarge <- 1
+aircraft[aircraft$IsAircraftLarge == "No",]$IsAircraftLarge <- 0
+#aircraft
+#aircraft$AircraftTypeID<- 1:354
+aircraft$IsAircraftLarge<- as.integer(aircraft$IsAircraftLarge)
+dbWriteTable(mydb, name = "aircraft", value= aircraft, append = TRUE,row.names=FALSE, overwrite = FALSE)
+```
+
+#Loading into airpline_operator table
+```{r}
+airline_operator <- sqldf('SELECT DISTINCT "Aircraft..Airline.Operator" AS AirlineOperator FROM df1')
+#airline_operator
+#airline_operator$AirlineOperatorID <- 1:293
+dbWriteTable(mydb, name = "airline_operator", value= airline_operator, append = TRUE,row.names=FALSE)
+
+```
+
+#Loading into airline_aircrafts table
+```{r}
+aircraft <- dbGetQuery(mydb, "SELECT * FROM `aircraft`;")
+
+airline_operator <- dbGetQuery(mydb, "SELECT * FROM `airline_operator`;")
+
+airline_aircrafts <- sqldf("SELECT DISTINCT aircraft.AircraftTypeID, airline_operator.airlineOperatorID, df1.`Aircraft..Number.of.engines.` AS `NumberOfEngines` 
+                           FROM aircraft INNER JOIN airline_operator INNER JOIN df1
+                           WHERE aircraft.`Make_Model` = df1.`Aircraft..Make.Model` AND 
+                           airline_operator.AirlineOperator = df1.`Aircraft..Airline.Operator`;")
+
+dbWriteTable(mydb, name = "airline_aircrafts", value= airline_aircrafts, append = TRUE,row.names=FALSE, overwrite = FALSE)
+```
+
+#Loading into wildlife table
+```{r}
+wildlife <- sqldf('SELECT DISTINCT "Wildlife..Species" AS Species, "Wildlife..Size" AS Size 
+                  FROM df1')
+#If dbWriteTable
+#wildlife$WildlifeID <- 1:395
+#wildlife
+dbWriteTable(mydb, name = "wildlife", value= wildlife, append = TRUE,row.names=FALSE)
+
+```
+
+#Loading into airport table
+```{r}
+airport <- sqldf('SELECT DISTINCT "Airport..Name" AS NAME, "Origin.State" AS State FROM df1')
+#airport
+#airport$AirportID<- 1:1141
+dbWriteTable(mydb, name = "airport", value= airport, append = TRUE,row.names=FALSE)
+
+```
+
+#Loading data into precipitation_type table
+```{r}
+precipitation_type <- sqldf('SELECT DISTINCT "Conditions..Precipitation" AS Precipitation_Type 
+                            FROM df1 
+                            WHERE Precipitation_Type NOT LIKE "%,%"')
+#precipitation_type
+dbWriteTable(mydb, name = "precipitation_type", value= precipitation_type, append = TRUE,row.names=FALSE)
+```
+
+#Loading data into precipitation
+```{r}
+
+precipitation_type <- dbGetQuery(mydb, "SELECT * FROM `precipitation_type`;")
+
+precipitation <- sqldf("SELECT df2.`Record.ID` AS RecordID, PrecipitationID 
+                       FROM df2 INNER JOIN precipitation_type 
+                       ON df2.'Conditions..Precipitation'= precipitation_type.Precipitation_Type;")
+dbWriteTable(mydb, name = "precipitation", value= precipitation, append = TRUE,row.names=FALSE)
+```
+
+#Loading data into bird_strike_incident table 
+```{r}
+cname <- c("Record.ID", "FlightDate", "Wildlife..Number.struck", "Wildlife..Number.Struck.Actual", "Effect..Impact.to.flight", "Altitude.bin", "Effect..Indicated.Damage", "When..Phase.of.flight", "Remains.of.wildlife.collected.", "Remains.of.wildlife.sent.to.Smithsonian", "Remarks", "Conditions..Sky", "Pilot.warned.of.birds.or.wildlife.", "Cost..Total..", "Feet.above.ground", "Number.of.people.injured")
+
+bird_strike_incident <- df1 %>% select(all_of(cname))
+bird_strike_incident$FlightDate <- as.Date(bird_strike_incident$FlightDate, format = "%m/%d/%Y")
+
+airport <- dbGetQuery(mydb, "SELECT * FROM `airport`;")
+bird_strike_incident$AirportID <- as.integer(0)
+
+x<-sqldf("SELECT DISTINCT `Record.ID`, AirportID 
+         FROM df1 INNER JOIN airport 
+         ON df1.'Airport..Name' = airport.Name AND df1.`Origin.State` = airport.State ")
+bird_strike_incident[bird_strike_incident$Record.ID == x$Record.ID, ]$AirportID<-x[bird_strike_incident$Record.ID == x$Record.ID,]$AirportID
+
+wildlife <- dbGetQuery(mydb, "SELECT * FROM `wildlife`;")
+
+bird_strike_incident$WildlifeID<- as.integer(0)
+x<-sqldf("SELECT DISTINCT df1.'Record.ID',wildlife.WildlifeID FROM df1 INNER JOIN wildlife ON df1.`Wildlife..Species`= wildlife.Species AND df1.`Wildlife..Size` = wildlife.Size")
+suppressWarnings(bird_strike_incident[bird_strike_incident$Record.ID == x$Record.ID,]$WildlifeID <- x[bird_strike_incident$Record.ID == x$Record.ID,]$WildlifeID)
+
+aircraft <- dbGetQuery(mydb, "SELECT * FROM `aircraft`;")
+airline_operator <- dbGetQuery(mydb, "SELECT * FROM `airline_operator`;")
+airline_aircrafts <- dbGetQuery(mydb, "SELECT * FROM `airline_aircrafts`;")
+
+bird_strike_incident$PlaneID<- as.integer(0)
+x1 <- sqldf("SELECT DISTINCT PlaneID, Make_Model, AirlineOperator, NumberOfEngines 
+            FROM aircraft INNER JOIN airline_operator INNER JOIN airline_aircrafts
+            WHERE airline_aircrafts.AircraftTypeID = aircraft.AircraftTypeID AND airline_aircrafts.AirlineOperatorID = airline_operator.AirlineOperatorID")
+
+x<-sqldf("SELECT DISTINCT df1.'Record.ID', x1.`PlaneID`
+         FROM df1 INNER JOIN x1
+         WHERE df1.`Aircraft..Make.Model` = x1.Make_Model AND df1.`Aircraft..Airline.Operator` = x1.AirlineOperator AND df1.`Aircraft..Number.of.engines.` = x1.NumberOfEngines;")
+
+suppressWarnings(bird_strike_incident[bird_strike_incident$Record.ID == x$Record.ID,]$PlaneID <- x[bird_strike_incident$Record.ID == x$Record.ID,]$PlaneID)
+
+colnames(bird_strike_incident) <- c("RecordID", "FlightDate", "WildLife_NumberOfStruck", "Wildlife_NumberOfStruckActual", "Effect_ImpactToFlight", "Altitude_Bin", "EffectIndicatedDamage", "PhaseOfFlight", "WildLifeRemainsCollected", "WildLifeRemainsSent", "Remarks", "ConditionsSky", "PilotWarned", "Cost_Total", "FeetAboveGround", "PeopleInjured", "AirportID", "WildlifeID", "PlaneID")
+dbWriteTable(mydb,  name = "bird_strike_incident", value= bird_strike_incident[], append = FALSE, row.names=FALSE, overwrite = TRUE)
+#dbSendQuery(mydb, "ALTER TABLE bird_strike_incidentSET CONSTRAINT `RecordID` PRIMARY KEY")
+#dbGetQuery(mydb, "SELECT * FROM bird_strike_incident")
+```
+
+#Printing Loaded Data:
+```{r}
+airport <- dbGetQuery(mydb, "SELECT * FROM airport")
+aircraft <- dbGetQuery(mydb, "SELECT * FROM aircraft")
+airline_aircrafts <- dbGetQuery(mydb, "SELECT * FROM airline_aircrafts")
+precipitation <- dbGetQuery(mydb, "SELECT * FROM precipitation")
+precipitation_type <- dbGetQuery(mydb, "SELECT * FROM precipitation_type")
+airline_operator <- dbGetQuery(mydb, "SELECT * FROM airline_operator")
+wildlife <- dbGetQuery(mydb, "SELECT * FROM wildlife")
+head(airport)
+head(aircraft)
+head(airline_aircrafts)
+head(airline_operator)
+head(wildlife)
+head(precipitation)
+head(precipitation_type)
+head(bird_strike_incident)
+```
+
+#Create a SQL query against your database to find the number of bird strike incidents for each airport upon take-off or climb. Include all airlines.
+```{r}
+sqldf("SELECT A.Name, COUNT(RecordID) AS NumberOfBirdStrikeIncidents FROM bird_strike_incident AS B INNER JOIN airport AS A ON B.AirportID = A.AirportID
+          GROUP BY B.AirportID")
+```
+
+#Create a SQL query against your database to find the airports that had the most bird strike incidents (during any flight phase). Include all airlines.
+```{r}
+sqldf("SELECT airport.Name, MAX(Count) AS NumberOfBirdStrikeIncidents FROM (SELECT AirportID, COUNT(RecordID) AS Count FROM bird_strike_incident
+    GROUP BY AirportID HAVING WildLife_NumberOfStruckActual>0
+    ORDER BY COUNT(RecordID) DESC) AS A INNER JOIN airport ON A.AirportID = airport.AirportID")
+
+```
+
+#Create a SQL query against your database to find the number of bird strike incidents by year. Include all airlines.
+```{r}
+year<-substr(bird_strike_incident$FlightDate, 1, 4)
+abd<-sqldf("SELECT * FROM bird_strike_incident")
+abd$FlightDate <- year
+ans<-sqldf("SELECT FlightDate, COUNT(RecordID) AS NumberOfBirdStrikes FROM abd GROUP BY FlightDate")
+ans
+```
+
+#Using the above data, build a line graph that visualizes the number of bird strikes incidents per year from 2000 to 2011. Adorn the graph with appropriate axis labels.
+```{r}
+plot(ans, type = "o")
+```
+
+#Creating a stored procedure in MySQL that adds a new bird strike incident to the database. Including the following data: airport name, aircraft type, flight date, airline, flight phase. The remaining columns can be set with default values as defined by the table definitions. Show that the insertion worked as expected by retrieving and displaying the inserted data. Add any additional arguments to the stored procedure as needed.
+```{r message=FALSE}
+
+dbSendQuery(mydb, "DROP PROCEDURE InsertData");
+query1 = "CREATE PROCEDURE InsertData (IN AirportName nvarchar(30), IN AircraftType nvarchar(45), IN FlightDate datetime, IN Airline nvarchar(45), IN Flightphase nvarchar(45))
+BEGIN
+INSERT INTO practicum1.airport (`Name`) VALUES(AirportName);
+INSERT INTO practicum1.aircraft (`Type`) VALUES(AircraftType);
+INSERT INTO practicum1.airline_operator (`AirlineOperator`) VALUES(AirlineOperator);
+INSERT INTO practicum1.bird_strike_incident (`FlightDate`, `PhaseOfFlight`) VALUES(FlightDate, Flightphase);
+UPDATE bird_strike_incident SET `AirportID` = (SELECT AirportID FROM airport WHERE Name = AirportName) WHERE `FlightDate` = FlightDate AND `PhaseOfFlight` = FlightPhase;
+INSERT INTO practicum1.airline_aircrafts (`AircraftTypeID`, `AirlineOperatorID`) SELECT `AircraftTypeID`, `AirlineOperatorID` FROM aircraft INNER JOIN airline_operator WHERE aircraft.Make_Model = ' ' AND aircraft.Type = AircraftType AND airline_operator.AirlineOperator = Airline;
+UPDATE bird_strike_incident SET `PlaneID` = (SELECT PlaneID FROM airline_aircrafts INNER JOIN aircraft INNER JOIN airline_operator WHERE aircraft.Type = AircraftType AND airline_operator.AirlineOperator = Airline);
+END"
+
+dbSendQuery(mydb, query1);
+
+dbSendQuery(mydb,"call practicum1.InsertData('Delhi', 'Airplane1', '2001/10/15', 'Air India', 'Climb');")
+
+```
+
+```{sql connection=mydb}
+SELECT * FROM aircraft WHERE `Type` = 'Airplane1';
+```
+
+```{sql connection=mydb}
+SELECT * FROM airport WHERE `Name` = 'Delhi';
+```
+
+
+```{r}
+dbDisconnect(mydb)
+```
+
+
+
+
+
+
+
